@@ -101,279 +101,6 @@
     <!-- end row -->
 
     <div class="row">
-        <div class="col-xl-5">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title mb-4">Sales Analytics</h4>
-
-                    <div class="row align-items-center">
-                        <div class="col-sm-6">
-                            <div id="donut-chart" class="apex-charts"></div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="py-3">
-                                            <p class="mb-1 text-truncate"><i
-                                                    class="mdi mdi-circle text-primary me-1"></i> Online
-                                            </p>
-                                            <h5>$ 2,652</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="py-3">
-                                            <p class="mb-1 text-truncate"><i
-                                                    class="mdi mdi-circle text-success me-1"></i>
-                                                Offline</p>
-                                            <h5>$ 2,284</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="py-3">
-                                            <p class="mb-1 text-truncate"><i
-                                                    class="mdi mdi-circle text-warning me-1"></i>
-                                                Marketing</p>
-                                            <h5>$ 1,753</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xl-4">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title mb-4">Monthly Sales</h4>
-
-                    <div id="scatter-chart" class="apex-charts"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xl-3">
-            <div class="card bg-primary">
-                <div class="card-body">
-                    <div class="text-white-50">
-                        <h5 class="text-white">2400 + New Users</h5>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus</p>
-                        <div>
-                            <a href="#" class="btn btn-outline-success btn-sm">View more</a>
-                        </div>
-                    </div>
-                    <div class="row justify-content-end">
-                        <div class="col-8">
-                            <div class="mt-4">
-                                <img src="{{ asset('assets/images/widget-img.png') }}" alt=""
-                                    class="img-fluid mx-auto d-block">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end row -->
-
-    <div class="row">
-        <div class="col-xl-3">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title mb-4">Overview</h4>
-
-                    <div>
-                        <div class="pb-3 border-bottom">
-                            <div class="row align-items-center">
-                                <div class="col-8">
-                                    <p class="mb-2">New Visitors</p>
-                                    <h4 class="mb-0">3,524</h4>
-                                </div>
-                                <div class="col-4">
-                                    <div class="text-end">
-                                        <div>
-                                            2.06 % <i class="mdi mdi-arrow-up text-success ms-1"></i>
-                                        </div>
-                                        <div class="progress progress-sm mt-3">
-                                            <div class="progress-bar" role="progressbar" style="width: 62%"
-                                                aria-valuenow="62" aria-valuemin="0" aria-valuemax="100">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="py-3 border-bottom">
-                            <div class="row align-items-center">
-                                <div class="col-8">
-                                    <p class="mb-2">Product Views</p>
-                                    <h4 class="mb-0">2,465</h4>
-                                </div>
-                                <div class="col-4">
-                                    <div class="text-end">
-                                        <div>
-                                            0.37 % <i class="mdi mdi-arrow-up text-success ms-1"></i>
-                                        </div>
-                                        <div class="progress progress-sm mt-3">
-                                            <div class="progress-bar bg-warning" role="progressbar"
-                                                style="width: 48%" aria-valuenow="48" aria-valuemin="0"
-                                                aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="pt-3">
-                            <div class="row align-items-center">
-                                <div class="col-8">
-                                    <p class="mb-2">Revenue</p>
-                                    <h4 class="mb-0">$ 4,653</h4>
-                                </div>
-                                <div class="col-4">
-                                    <div class="text-end">
-                                        <div>
-                                            2.18 % <i class="mdi mdi-arrow-up text-success ms-1"></i>
-                                        </div>
-                                        <div class="progress progress-sm mt-3">
-                                            <div class="progress-bar bg-success" role="progressbar"
-                                                style="width: 78%" aria-valuenow="78" aria-valuemin="0"
-                                                aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xl-3">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title mb-4">Reviews</h4>
-                    <div class="mb-4">
-                        <h5><span class="text-primary">500</span>+ Satisfied clients</h5>
-                    </div>
-                    <div class="mb-3">
-                        <i class="fas fa-quote-left h4 text-primary"></i>
-                    </div>
-                    <div id="reviewExampleControls" class="carousel slide review-carousel"
-                        data-ride="carousel">
-
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <div>
-                                    <p>To achieve this, it would be necessary to have uniform grammar,
-                                        pronunciation and more common words</p>
-                                    <div class="d-flex align-items-start mt-4">
-                                        <div class="avatar-sm me-3">
-                                            <span
-                                                class="avatar-title bg-soft-primary text-primary rounded-circle">
-                                                J
-                                            </span>
-                                        </div>
-                                        <div class="flex-1">
-                                            <h5 class="font-size-16 mb-1">Jessie Mitchell</h5>
-                                            <p class="mb-2">CEO of ABC Company</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div>
-                                    <p>For science, music, sport, etc, Europe uses the same vocabulary
-                                        languages only differ in their grammar</p>
-                                    <div class="d-flex align-items-start mt-4">
-                                        <div class="avatar-sm me-3">
-                                            <img src="{{ asset('assets/images/users/avatar-4.jpg') }}" alt=""
-                                                class="img-fluid rounded-circle">
-                                        </div>
-                                        <div class="flex-1">
-                                            <h5 class="font-size-16 mb-1">Kelly Rivera</h5>
-                                            <p class="mb-2">Web Developer</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div>
-                                    <p>The new common language will be more simple and regular than the
-                                        existing European languages.</p>
-                                    <div class="d-flex align-items-start mt-4">
-                                        <div class="avatar-sm me-3">
-                                            <span
-                                                class="avatar-title bg-soft-primary text-primary rounded-circle">
-                                                S
-                                            </span>
-                                        </div>
-                                        <div class="flex-1">
-                                            <h5 class="font-size-16 mb-1">Simon Hawkins</h5>
-                                            <p class="mb-2">CEO of XYZ Company</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <a class="carousel-control-prev" href="#reviewExampleControls" role="button"
-                            data-bs-slide="prev">
-                            <i class="mdi mdi-chevron-left carousel-control-icon"></i>
-                        </a>
-                        <a class="carousel-control-next" href="#reviewExampleControls" role="button"
-                            data-bs-slide="next">
-                            <i class="mdi mdi-chevron-right carousel-control-icon"></i>
-                        </a>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-6">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title mb-4">Revenue by location</h4>
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div id="usa-vectormap" style="height: 230px"></div>
-                        </div>
-
-                        <div class="col-sm-5 ms-auto">
-                            <div class="mt-4 mt-sm-0">
-                                <p>Last month Revenue</p>
-
-                                <div class="d-flex align-items-start py-3">
-                                    <div class="flex-1">
-                                        <p class="mb-2">California</p>
-                                        <h5 class="mb-0">$ 2,256</h5>
-                                    </div>
-                                    <div class="ms-auto">
-                                        2.52 % <i class="mdi mdi-arrow-up text-success ms-1"></i>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-start py-3 border-top">
-                                    <div class="flex-1">
-                                        <p class="mb-2">Nevada</p>
-                                        <h5 class="mb-0">$ 1,853</h5>
-                                    </div>
-                                    <div class="ms-auto">
-                                        1.26 % <i class="mdi mdi-arrow-up text-success ms-1"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end row -->
-
-    <div class="row">
         <div class="col-xl-4">
             <div class="card">
                 <div class="card-body">
@@ -384,7 +111,7 @@
                             <a href="#">
                                 <div class="d-flex align-items-start">
                                     <div class="me-3 align-self-center">
-                                        <img src="{{ asset('assets/images/users/avatar-3.jpg') }}" alt=""
+                                        <img src="{{ asset('backend/assets/images/users/avatar-3.jpg') }}" alt=""
                                             class="avatar-sm rounded-circle">
                                     </div>
                                     <div class="flex-1 overflow-hidden">
@@ -401,7 +128,7 @@
                             <a href="#">
                                 <div class="d-flex align-items-start">
                                     <div class="me-3 align-self-center">
-                                        <img src="{{ asset('assets/images/users/avatar-4.jpg') }}" alt=""
+                                        <img src="{{ asset('backend/assets/images/users/avatar-4.jpg') }}" alt=""
                                             class="avatar-sm rounded-circle">
                                     </div>
                                     <div class="flex-1 overflow-hidden">
@@ -418,7 +145,7 @@
                             <a href="#">
                                 <div class="d-flex align-items-start">
                                     <div class="me-3 align-self-center">
-                                        <img src="{{ asset('assets/images/users/avatar-5.jpg') }}" alt=""
+                                        <img src="{{ asset('backend/assets/images/users/avatar-5.jpg') }}" alt=""
                                             class="avatar-sm rounded-circle">
                                     </div>
                                     <div class="flex-1 overflow-hidden">
@@ -435,7 +162,7 @@
                             <a href="#">
                                 <div class="d-flex align-items-start">
                                     <div class="me-3 align-self-center">
-                                        <img src="{{ asset('assets/images/users/avatar-6.jpg') }}" alt=""
+                                        <img src="{{ asset('backend/assets/images/users/avatar-6.jpg') }}" alt=""
                                             class="avatar-sm rounded-circle">
                                     </div>
                                     <div class="flex-1 overflow-hidden">

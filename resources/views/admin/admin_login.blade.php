@@ -9,14 +9,14 @@
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('backend/assets/images/favicon.ico') }}">
 
     <!-- Bootstrap Css -->
-    <link href="{{ asset('assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backend/assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
-    <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backend/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="{{ asset('assets/css/app.min.css') }}"  id="app-style"  rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backend/assets/css/app.min.css') }}"  id="app-style"  rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -35,7 +35,7 @@
                                 <h5 class="text-white font-size-20">Selamat Datang Kembali Admin !</h5>
                                 <p class="text-white-50 mb-0">Silahkan Sign in Untuk Melanjutkan</p>
                                 <a href="index.html" class="logo logo-admin mt-4">
-                                    <img src="{{ asset('assets/images/logo-sm-dark.png') }}" alt="" height="30">
+                                    <img src="{{ asset('backend/assets/images/logo-sm-dark.png') }}" alt="" height="30">
                                 </a>
                             </div>
                         </div>
@@ -91,14 +91,14 @@
 
     <!-- JAVASCRIPT -->
     <!-- JAVASCRIPT -->
-    <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/metismenu/metisMenu.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/libs/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/libs/metismenu/metisMenu.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/libs/node-waves/waves.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/libs/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
 
-    <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/app.js') }}"></script>
 
 </body>
 
