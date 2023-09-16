@@ -121,12 +121,17 @@
                     </div>
                 </div>
 
+                @php
+                    $id = Auth::user()->id;
+                    $profileData = App\Models\User::find($id);
+                @endphp
+
                 <div class="dropdown d-inline-block">
                     <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img class="rounded-circle header-profile-user" src="{{ (!empty($profileData->photo)) ? url('upload/admin_images/'.$profileData->photo) : url('upload/no_image.png') }}"
                             alt="Header Avatar">
-                        <span class="d-none d-xl-inline-block ms-1">Patrick</span>
+                        <span class="d-none d-xl-inline-block ms-1">{{ $profileData->name }}</span>
                         <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-end">

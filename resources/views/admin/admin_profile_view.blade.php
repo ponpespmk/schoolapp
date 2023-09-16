@@ -129,13 +129,13 @@
                             </div>
                             <div class="col-12">
                                 <div class="mb-3">
-                                    <label class="form-label" for="photo">Photo</label>
+                                    <label class="form-label" for="image">Photo</label>
                                     <input type="file" class="form-control" name="photo" id="image"></input>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="mb-3">
-                                    <img src="{{ (!empty($profileData->photo)) ? url('upload/admin_images/'.$profileData->photo) : url('upload/no_image.png') }}" class="avatar-lg img-thumbnail rounded">
+                                    <img id="showImage" src="{{ (!empty($profileData->photo)) ? url('upload/admin_images/'.$profileData->photo) : url('upload/no_image.png') }}" class="avatar-lg img-thumbnail rounded">
                                 </div>
                             </div>
                             <!-- end col -->

@@ -2,6 +2,11 @@
 
     <div class="h-100">
 
+        @php
+            $id = Auth::user()->id;
+            $profileData = App\Models\User::find($id);
+        @endphp
+
         <div class="user-wid text-center py-4">
             <div class="user-img">
                 <img src="{{ (!empty($profileData->photo)) ? url('upload/admin_images/'.$profileData->photo) : url('upload/no_image.png') }}" alt="" class="avatar-md mx-auto rounded-circle">
@@ -9,8 +14,8 @@
 
             <div class="mt-3">
 
-                <a href="#" class="text-body fw-medium font-size-16">Syukri Yanto, S.Kom</a>
-                <p class="text-muted mt-1 mb-0 font-size-13">UI/UX Designer</p>
+                <a href="#" class="text-body fw-medium font-size-16 text-uppercase">{{ $profileData->role }}</a>
+                <p class="text-muted mt-1 mb-0 font-size-13">{{ $profileData->name }}</p>
 
             </div>
         </div>
