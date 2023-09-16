@@ -138,8 +138,7 @@
                         <!-- item-->
                         <a class="dropdown-item" href="{{ route('admin.profile') }}"><i class="bx bx-user font-size-16 align-middle me-1"></i>
                             Profile</a>
-                        <a class="dropdown-item" href="#"><i class="bx bx-wallet font-size-16 align-middle me-1"></i> My
-                            Wallet</a>
+                        <a class="dropdown-item" href="{{ route('admin.change.password') }}"><i class="bx bx-key font-size-16 align-middle me-1"></i> Change Password</a>
                         <a class="dropdown-item d-block" href="#"><span class="badge bg-success float-end">11</span><i
                                 class="bx bx-wrench font-size-16 align-middle me-1"></i> Settings</a>
                         <a class="dropdown-item" href="#"><i class="bx bx-lock-open font-size-16 align-middle me-1"></i>

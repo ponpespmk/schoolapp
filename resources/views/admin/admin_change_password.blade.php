@@ -72,6 +72,7 @@
                             <h6 class="">+62 8126 6583 335</h6>
                         </div>
 
+
                     </div>
 
                 </div>
@@ -84,62 +85,38 @@
 
         <div class="card">
             <div class="card-body">
-                <h2 class="card-title mb-0 menu-title">Update Admin Profile</h2>
+                <h2 class="card-title mb-0 menu-title">Admin Change Password</h2>
 
                 <!-- Tab panes -->
                 <div class="p-3 text-muted">
-                    <form method="POST" action="{{ route('admin.profile.store') }}" class="form-horizontal" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('admin.update.password') }}" class="form-horizontal">
                         @csrf
 
                         <div class="row mt-1">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="mb-3">
-                                    <label class="form-label" for="username">Username</label>
-                                    <input type="text" name="username" class="form-control" id="username"
-                                        value="{{ $profileData->username }}">
+                                    <label class="form-label" for="old_password">Old Password</label>
+                                    <input type="password" name="old_password" id="old_password" class="form-control @error('old_password') is-invalid @enderror" autocomplete="off">
+                                    @error('old_password')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="mb-3">
-                                    <label class="form-label" for="name">Name</label>
-                                    <input type="text" name="name" class="form-control" id="name"
-                                        value="{{ $profileData->name }}">
+                                    <label class="form-label" for="new_password">New Password</label>
+                                    <input type="password" name="new_password" id="new_password" class="form-control @error('new_password') is-invalid @enderror" autocomplete="off">
+                                    @error('new_password')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="mb-3">
-                                    <label class="form-label" for="email">Email</label>
-                                    <input type="email" name="email" class="form-control" id="email"
-                                        value="{{ $profileData->email }}">
+                                    <label class="form-label" for="new_password_confirmation">Confirm New Password</label>
+                                    <input type="password" name="new_password_confirmation" id="new_password_confirmation" class="form-control" autocomplete="off">
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label" for="phone">Phone</label>
-                                    <input type="phone" name="phone" class="form-control" id="phone"
-                                        value="{{ $profileData->phone }}">
-                                </div>
-                            </div><!-- end col -->
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="mb-3">
-                                    <label class="form-label" for="address">Address</label>
-                                    <input type="text" class="form-control" name="address" id="address" value="{{ $profileData->address }}"></input>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="mb-3">
-                                    <label class="form-label" for="image">Photo</label>
-                                    <input type="file" class="form-control" name="photo" id="image"></input>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="mb-3">
-                                    <img id="showImage" src="{{ (!empty($profileData->photo)) ? url('upload/admin_images/'.$profileData->photo) : url('upload/no_image.png') }}" class="avatar-lg img-thumbnail rounded">
-                                </div>
-                            </div>
-                            <!-- end col -->
                         </div>
                         <div class="mb-0">
                             <div>
@@ -159,17 +136,5 @@
 
 
 </div>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('#image').change(function(e){
-            var reader = new FileReader();
-            reader.onload = function(e){
-                $('#showImage').attr('src',e.target.result);
-            }
-            reader.readAsDataURL(e.target.files['0']);
-        });
-    });
-</script>
 
 @endsection
