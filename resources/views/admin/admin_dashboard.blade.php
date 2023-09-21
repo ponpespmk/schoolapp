@@ -3,16 +3,13 @@
 
     <head>
         <meta charset="utf-8" />
-        <title>Admin Panel - Scholl App</title>
+        <title>{{ $title }} | SYTechId</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{ asset('backend/assets/images/favicon.ico') }}">
 
-        <!-- jquery.vectormap css -->
-        <link href="{{ asset('backend/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css') }}" rel="stylesheet"
-            type="text/css" />
 
         <!-- Bootstrap Css -->
         <link href="{{ asset('backend/assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
@@ -21,6 +18,8 @@
         <!-- App Css-->
         <link href="{{ asset('backend/assets/css/app.min.css') }}"  id="app-style"  rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
+
+        @stack('cssStyle')
 
     </head>
 
@@ -49,7 +48,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-flex align-items-center justify-content-between">
-                            <h4 class="page-title mb-0 font-size-18">Dashboard tes</h4>
+                            <h4 class="page-title mb-0 font-size-18">{{ $titlepage }}</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
@@ -63,7 +62,7 @@
                 <!-- end page title -->
 
                 <!-- start row -->
-                @yield('admin')
+                @yield('admin_content')
                 <!-- end row -->
 
             </div>
@@ -87,7 +86,6 @@
     <div class="rightbar-overlay"></div>
 
     <!-- JAVASCRIPT -->
-    <!-- JAVASCRIPT -->
     <script src="{{ asset('backend/assets/libs/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('backend/assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('backend/assets/libs/metismenu/metisMenu.min.js') }}"></script>
@@ -95,41 +93,38 @@
     <script src="{{ asset('backend/assets/libs/node-waves/waves.min.js') }}"></script>
     <script src="{{ asset('backend/assets/libs/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
 
-    <!-- apexcharts -->
-    <script src="{{ asset('backend/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
-
-    <!-- jquery.vectormap map -->
-    <script src="{{ asset('backend/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
-    <script src="{{ asset('backend/assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-us-merc-en.js') }}"></script>
-
-    <script src="{{ asset('backend/assets/js/pages/dashboard.init.js') }}"></script>
-
+    <!-- App js -->
     <script src="{{ asset('backend/assets/js/app.js') }}"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="{{ asset('backend/assets/js/code/code.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/code/validate.min.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-<script>
- @if(Session::has('message'))
- var type = "{{ Session::get('alert-type','info') }}"
- switch(type){
-    case 'info':
-    toastr.info(" {{ Session::get('message') }} ");
-    break;
+    @stack('jsScript')
 
-    case 'success':
-    toastr.success(" {{ Session::get('message') }} ");
-    break;
+    <script>
+        @if(Session::has('message'))
+        var type = "{{ Session::get('alert-type','info') }}"
+        switch(type){
+            case 'info':
+                toastr.info(" {{ Session::get('message') }} ");
+                break;
 
-    case 'warning':
-    toastr.warning(" {{ Session::get('message') }} ");
-    break;
+                case 'success':
+                    toastr.success(" {{ Session::get('message') }} ");
+                    break;
 
-    case 'error':
-    toastr.error(" {{ Session::get('message') }} ");
-    break;
- }
- @endif
-</script>
+                    case 'warning':
+                        toastr.warning(" {{ Session::get('message') }} ");
+                        break;
+
+            case 'error':
+            toastr.error(" {{ Session::get('message') }} ");
+            break;
+        }
+        @endif
+    </script>
 
     </body>
 

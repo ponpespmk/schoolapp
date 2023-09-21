@@ -1,5 +1,5 @@
-@extends('admin.admin_dashboard')
-@section('admin')
+@extends('admin.admin_dashboard', ['title' => 'Admin Change Password'])
+@section('admin_content')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
 <div class="row">
@@ -138,3 +138,13 @@
 </div>
 
 @endsection
+
+<!-- Styles .css -->
+@push('cssStyle')
+
+@endpush
+
+<!-- Script .js -->
+@push('jsScript')
+
+@endpush

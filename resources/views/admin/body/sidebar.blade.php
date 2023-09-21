@@ -35,6 +35,31 @@
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="mdi mdi-toolbox"></i>
+                        <span>Property Type</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('all.type') }}">All Type</a></li>
+                    </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="email-inbox.html">Add Type</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="mdi mdi-clipboard-list-outline"></i>
+                        <span>Amenities</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('all.amenitie') }}">All Amenities</a></li>
+                        <li><a href="#">Add Amenities</a></li>
+                    </ul>
+                </li>
+
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-account-card-details-outline"></i>
                         <span>Santri</span>
                     </a>
@@ -66,13 +91,6 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="email-inbox.html">Daftar Ustadz</a></li>
                     </ul>
-                </li>
-
-                <li>
-                    <a href="calendar.html" class=" waves-effect">
-                        <i class="mdi mdi-calendar-text"></i>
-                        <span>Ustadz</span>
-                    </a>
                 </li>
 
                 <li>
