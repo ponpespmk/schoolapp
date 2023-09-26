@@ -1,4 +1,7 @@
-@extends('admin.admin_dashboard', ['title' => 'Profile'])
+@extends('admin.admin_dashboard', [
+    'title'     => 'Profile',
+    'titlepage' => 'Admin Profile',
+    ])
 @section('admin_content')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 

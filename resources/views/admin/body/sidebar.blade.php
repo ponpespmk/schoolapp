@@ -126,15 +126,15 @@
                     </ul>
                 </li>
 
-                <li class="menu-title">Components</li>
+                <li class="menu-title">Role & Permission</li>
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="mdi mdi-checkbox-multiple-blank-outline"></i>
-                        <span>UI Elements</span>
+                        <i class="mdi mdi-server-security"></i>
+                        <span>Role & Permission</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="ui-alerts.html">Alerts</a></li>
+                        <li><a href="{{ route('all.permission') }}">All Permission</a></li>
                         <li><a href="ui-buttons.html">Buttons</a></li>
                     </ul>
                 </li>
