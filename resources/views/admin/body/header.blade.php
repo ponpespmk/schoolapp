@@ -330,7 +330,7 @@
                                     <div class="col-sm-6">
                                         <div>
                                             <div class="card text-white mb-0 overflow-hidden text-white-50"
-                                                style="background-image: url('assets/images/megamenu-img.png');background-size: cover;">
+                                                style="background-image: url('/backend/assets/images/megamenu-img.png');background-size: cover;">
                                                 <div class="card-img-overlay"></div>
                                                 <div class="card-body">
                                                     <div class="row">

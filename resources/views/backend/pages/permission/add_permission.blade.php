@@ -32,9 +32,19 @@
                                     <label class="form-label" for="group_name">Group Name</label>
                                     <select name="group_name" class="form-select" aria-label="Default select example">
                                         <option selected="">Select Group</option>
+                                        <option value="agent">Agent</option>
                                         <option value="amenities">Amenities</option>
-                                        <option value="type">Property Type</option>
+                                        <option value="category">Category</option>
+                                        <option value="comment">Comment</option>
+                                        <option value="history">History</option>
+                                        <option value="post">Post</option>
+                                        <option value="property">Property</option>
                                         <option value="role">Role & Permission</option>
+                                        <option value="site">Site</option>
+                                        <option value="smtp">STTP</option>
+                                        <option value="state">State</option>
+                                        <option value="Testimonials">Testimonials</option>
+                                        <option value="type">Property Type</option>
                                     </select>
                                 </div>
                             </div>

@@ -42,14 +42,15 @@ Route::middleware(['auth','role:admin'])->group(function(){
     Route::post('/admin/profile/store', [AdminController::class, 'AdminProfileStore'])->name('admin.profile.store');
     Route::get('/admin/change/password', [AdminController::class, 'AdminChangePassword'])->name('admin.change.password');
     Route::post('/admin/update/password', [AdminController::class, 'AdminUpdatePassword'])->name('admin.update.password');
-});
-// End Group Admin Middleware
+
+}); // End Group Admin Middleware
 
 // Agent Group Middleware
 Route::middleware(['auth','role:agent'])->group(function(){
+
     Route::get('/agent/dashboard', [AgentController::class, 'AgentDashboard'])->name('agent.dashboard');
-});
-// End Group Agent Middleware
+
+}); // End Group Agent Middleware
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
 
@@ -83,6 +84,40 @@ Route::middleware(['auth','role:admin'])->group(function(){
         Route::get('/edit/permission/{id}','EditPermission')->name('edit.permission');
         Route::post('/update/permission','UpdatePermission')->name('update.permission');
         Route::get('/delete/permission/{id}','DeletePermission')->name('delete.permission');
+        Route::get('/import/permission','ImportPermission')->name('import.permission');
+        Route::get('/export','Export')->name('export');
+        Route::post('/import','Import')->name('import');
     });
-});
-// End Group Admin Middleware
+
+    //Roles All Route
+    Route::controller(RoleController::class)->group(function(){
+        Route::get('/all/roles','AllRoles')->name('all.roles');
+        Route::get('/add/roles','AddRoles')->name('add.roles');
+        Route::post('/store/roles','StoreRoles')->name('store.roles');
+        Route::get('/edit/roles/{id}','EditRoles')->name('edit.roles');
+        Route::post('/update/roles','UpdateRoles')->name('update.roles');
+        Route::get('/delete/roles/{id}','DeleteRoles')->name('delete.roles');
+        Route::get('/import/roles','ImportRoles')->name('import.roles');
+
+        Route::get('/add/roles/permission','AddRolesPermission')->name('add.roles.permission');
+        Route::post('/roles/permission/store','RolePermissionStore')->name('role.permission.store');
+        Route::get('/all/roles/permission','AllRolesPermission')->name('all.roles.permission');
+        Route::get('/admin/edit/roles/{id}','AdminEditRoles')->name('admin.edit.roles');
+        Route::post('/admin/rules/update/{id}','AdminRolesUpdate')->name('admin.roles.update');
+        Route::get('/admin/delete/roles/{id}','AdminDeleteRoles')->name('admin.delete.roles');
+
+    });
+
+    //Admin User All Route
+    Route::controller(AdminController::class)->group(function(){
+        Route::get('/all/admin','AllAdmin')->name('all.admin');
+        Route::get('/add/admin','AddAdmin')->name('add.admin');
+        Route::post('/store/admin','StoreAdmin')->name('store.admin');
+        Route::get('/edit/admin/{id}','EditAdmin')->name('edit.admin');
+        Route::post('/update/admin/{id}','UpdateAdmin')->name('update.admin');
+        Route::get('/delete/admin/{id}','DeleteAdmin')->name('delete.admin');
+
+    });
+
+
+}); // End Group Admin Middleware

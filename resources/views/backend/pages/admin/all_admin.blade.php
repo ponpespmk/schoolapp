@@ -1,6 +1,6 @@
 @extends('admin.admin_dashboard', [
-    'title'     => 'Permission',
-    'titlepage' => 'All Permission',
+    'title'     => 'Admin',
+    'titlepage' => 'All Admin',
     ])
 @section('admin_content')
 
@@ -11,45 +11,47 @@
             <div class="card-body">
 
                 <div class="col-lg-12 mb-3 button-items">
-                    <a href="{{ route('add.permission') }}" class="btn btn-info waves-effect waves-light">
+                    <a href="{{ route('add.admin') }}" class="btn btn-info waves-effect waves-light">
                         <i class="bx bx-add-to-queue font-size-16 align-middle me-2"></i>
-                        Add Permission
-                    </a>
-                    <a href="{{ route('import.permission') }}" class="btn btn-rounded btn-outline-success waves-effect waves-light">
-                        <i class="bx bx-import font-size-16 align-middle me-2"></i>
-                        Import
-                    </a>
-                    <a href="{{ route('export') }}" class="btn btn-rounded btn-outline-warning waves-effect waves-light">
-                        <i class="bx bx-export font-size-16 align-middle me-2"></i>
-                        Export
+                        Add Admin
                     </a>
                 </div>
 
-                <table id="datatable" class="table table-bordered dt-responsive nowrap"
-                    style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                <table id="datatable" class="table table-bordered nowrap"
+                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
                         <tr>
                             <th>Sl</th>
-                            <th>Permission Name</th>
-                            <th>Group Name</th>
-                            <th>Action</th>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Role</th>
+                            <th class="text-center">Action</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        @foreach ($permissions as $key => $item)
+                        @foreach ($alladmin as $key => $item)
                         <tr>
                             <td>{{ $key+1 }}</td>
+                            <td><img src="
+                                {{ (!empty($item->photo)) ? url('upload/admin_images/'.$item->photo) : url('upload/no_image.png') }}
+                                " alt="" class="rounded-circle avatar-sm"></td>
                             <td>{{ $item->name }}</td>
-                            <td>{{ $item->group_name }}</td>
+                            <td>{{ $item->email }}</td>
+                            <td>{{ $item->phone }}</td>
                             <td>
-                                <a href="{{ route('edit.permission',$item->id) }}" class="btn btn-sm btn-rounded btn-warning waves-effect waves-light">
-                                    <i class="bx bxs-edit-alt font-size-16 align-middle me-2"></i>
-                                    Edit
+                                @foreach ($item->roles as $role)
+                                    <span class="badge rounded-pill bg-primary">{{ $role->name }}</span>
+                                @endforeach
+                            </td>
+                            <td style="width: 15%; text-align: center;">
+                                <a href="{{ route('edit.admin',$item->id) }}" class="btn btn-outline-warning btn-sm edit mt-1" title="Edit">
+                                    <i class="fas fa-pencil-alt"></i>
                                 </a>
-                                <a href="{{ route('delete.permission',$item->id) }}" class="btn btn-sm btn-rounded btn-danger waves-effect waves-light" id="delete">
-                                    <i class="bx bxs-trash font-size-16 align-middle me-2"></i>
-                                    Delete
+                                <a href="{{ route('delete.admin',$item->id) }}" class="btn btn-outline-danger btn-sm edit mt-1" title="Delete" id="delete">
+                                    <i class="far fa-trash-alt"></i>
                                 </a>
                             </td>
                         </tr>

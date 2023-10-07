@@ -33,18 +33,28 @@
                     </a>
                 </li>
 
+                @if (Auth::user()->can('type.menu'))
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-toolbox"></i>
                         <span>Property Type</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{ route('all.type') }}">All Type</a></li>
+                        <li>
+                            @if(Auth::user()->can('all.type'))
+                            <a href="{{ route('all.type') }}">All Type</a>
+                            @endif
+                        </li>
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="email-inbox.html">Add Type</a></li>
+                        <li>
+                            @if(Auth::user()->can('add.type'))
+                            <a href="{{ route('add.type') }}">Add Type</a>
+                            @endif
+                        </li>
                     </ul>
                 </li>
+                @endif
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -58,7 +68,7 @@
                 </li>
 
 
-                <li>
+                {{-- <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-account-card-details-outline"></i>
                         <span>Santri</span>
@@ -81,9 +91,9 @@
                         </li>
                     </ul>
 
-                </li>
+                </li> --}}
 
-                <li>
+                {{-- <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="mdi mdi-account-supervisor-circle"></i>
                         <span>Ustadz</span>
@@ -91,113 +101,35 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="email-inbox.html">Daftar Ustadz</a></li>
                     </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="mdi mdi-inbox-full"></i>
-                        <span>Email</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="email-inbox.html">Inbox</a></li>
-                        <li><a href="email-read.html">Read Email</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="mdi mdi-calendar-check"></i>
-                        <span>Tasks</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="tasks-list.html">Task List</a></li>
-                        <li><a href="tasks-kanban.html">Kanban Board</a></li>
-                        <li><a href="tasks-create.html">Create Task</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="mdi mdi-account-circle-outline"></i>
-                        <span>Pages</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="pages-login.html">Login</a></li>
-                    </ul>
-                </li>
+                </li> --}}
 
                 <li class="menu-title">Role & Permission</li>
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="mdi mdi-server-security"></i>
+                        <i class="mdi mdi-security-network"></i>
                         <span>Role & Permission</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('all.permission') }}">All Permission</a></li>
-                        <li><a href="ui-buttons.html">Buttons</a></li>
+                        <li><a href="{{ route('all.roles') }}">All Roles</a></li>
+                        <li><a href="{{ route('add.roles.permission') }}">Roles In Permission</a></li>
+                        <li><a href="{{ route('all.roles.permission') }}">All Roles In Permission</a></li>
                     </ul>
                 </li>
 
-                <li>
-                    <a href="javascript: void(0);" class="waves-effect">
-                        <i class="mdi mdi-newspaper"></i>
-                        <span>Forms</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="form-elements.html">Form Elements</a></li>
-                        <li><a href="form-validation.html">Form Validation</a></li>
-                    </ul>
-                </li>
+
+                <li class="menu-title">Manage Admin User</li>
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="mdi mdi-clipboard-list-outline"></i>
-                        <span>Tables</span>
+                        <i class="mdi mdi-account-settings-outline"></i>
+                        <span>Manage Admin User</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="tables-basic.html">Basic Tables</a></li>
-                        <li><a href="tables-datatable.html">Data Tables</a></li>
-                        <li><a href="tables-responsive.html">Responsive Table</a></li>
-                        <li><a href="tables-editable.html">Editable Table</a></li>
-                    </ul>
-                </li>
+                        <li><a href="{{ route('all.admin') }}">All Admin</a></li>
+                        <li><a href="{{ route('add.admin') }}">Add Admin</a></li>
 
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="mdi mdi-chart-donut"></i>
-                        <span>Charts</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="charts-apex.html">Apex charts</a></li>
-                        <li><a href="charts-chartjs.html">Chartjs Chart</a></li>
-                        <li><a href="charts-flot.html">Flot Chart</a></li>
-                        <li><a href="charts-knob.html">Jquery Knob Chart</a></li>
-                        <li><a href="charts-sparkline.html">Sparkline Chart</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="mdi mdi-emoticon-happy-outline"></i>
-                        <span>Icons</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="icons-boxicons.html">Boxicons</a></li>
-                        <li><a href="icons-materialdesign.html">Material Design</a></li>
-                        <li><a href="icons-dripicons.html">Dripicons</a></li>
-                        <li><a href="icons-fontawesome.html">Font awesome</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="mdi mdi-map-marker-outline"></i>
-                        <span>Maps</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="maps-google.html">Google Maps</a></li>
-                        <li><a href="maps-vector.html">Vector Maps</a></li>
                     </ul>
                 </li>
 
@@ -215,6 +147,12 @@
                             </ul>
                         </li>
                     </ul>
+                </li>
+                <li>
+                    <a href="calendar.html" class="text-danger waves-effect bx-flashing-hover text-bold" aria-expanded="false">
+                        <i class="mdi mdi-power text-danger"></i>
+                        <span>Log Out</span>
+                    </a>
                 </li>
 
             </ul>

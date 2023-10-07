@@ -1,6 +1,6 @@
 @extends('admin.admin_dashboard', [
-    'title'     => 'Permission',
-    'titlepage' => 'All Permission',
+    'title'     => 'Roles',
+    'titlepage' => 'All Roles',
     ])
 @section('admin_content')
 
@@ -11,17 +11,9 @@
             <div class="card-body">
 
                 <div class="col-lg-12 mb-3 button-items">
-                    <a href="{{ route('add.permission') }}" class="btn btn-info waves-effect waves-light">
+                    <a href="{{ route('add.roles') }}" class="btn btn-info waves-effect waves-light">
                         <i class="bx bx-add-to-queue font-size-16 align-middle me-2"></i>
-                        Add Permission
-                    </a>
-                    <a href="{{ route('import.permission') }}" class="btn btn-rounded btn-outline-success waves-effect waves-light">
-                        <i class="bx bx-import font-size-16 align-middle me-2"></i>
-                        Import
-                    </a>
-                    <a href="{{ route('export') }}" class="btn btn-rounded btn-outline-warning waves-effect waves-light">
-                        <i class="bx bx-export font-size-16 align-middle me-2"></i>
-                        Export
+                        Add Roles
                     </a>
                 </div>
 
@@ -30,24 +22,22 @@
                     <thead>
                         <tr>
                             <th>Sl</th>
-                            <th>Permission Name</th>
-                            <th>Group Name</th>
+                            <th>Roles Name</th>
                             <th>Action</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        @foreach ($permissions as $key => $item)
+                        @foreach ($roles as $key => $item)
                         <tr>
                             <td>{{ $key+1 }}</td>
                             <td>{{ $item->name }}</td>
-                            <td>{{ $item->group_name }}</td>
                             <td>
-                                <a href="{{ route('edit.permission',$item->id) }}" class="btn btn-sm btn-rounded btn-warning waves-effect waves-light">
+                                <a href="{{ route('edit.roles',$item->id) }}" class="btn btn-sm btn-rounded btn-warning waves-effect waves-light">
                                     <i class="bx bxs-edit-alt font-size-16 align-middle me-2"></i>
                                     Edit
                                 </a>
-                                <a href="{{ route('delete.permission',$item->id) }}" class="btn btn-sm btn-rounded btn-danger waves-effect waves-light" id="delete">
+                                <a href="{{ route('delete.roles',$item->id) }}" class="btn btn-sm btn-rounded btn-danger waves-effect waves-light" id="delete">
                                     <i class="bx bxs-trash font-size-16 align-middle me-2"></i>
                                     Delete
                                 </a>
