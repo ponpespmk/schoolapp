@@ -29,9 +29,9 @@
             <li class="side-nav-title">Main</li>
 
             <li class="side-nav-item">
-                <a href="#" class="side-nav-link">
+                <a href="{{ route('admin.dashboard') }}" class="side-nav-link">
                     <i class="ri-dashboard-3-line"></i>
-                    <span class="badge bg-success float-end">9+</span>
+                    <span class="badge bg-success float-end">5+</span>
                     <span> Dashboard </span>
                 </a>
             </li>
@@ -40,13 +40,16 @@
                 <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages"
                     class="side-nav-link">
                     <i class="ri-pages-line"></i>
-                    <span> Pages </span>
+                    <span> Property Type </span>
                     <span class="menu-arrow"></span>
                 </a>
                 <div class="collapse" id="sidebarPages">
                     <ul class="side-nav-second-level">
                         <li>
-                            <a href="#">Starter Page</a>
+                            <a href="{{ route('all.type') }}">All Type</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('add.type') }}">Add Type</a>
                         </li>
                     </ul>
                 </div>

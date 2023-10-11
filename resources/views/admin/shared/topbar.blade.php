@@ -77,14 +77,19 @@
                 </div>
             </li>
 
+            @php
+                $id = Auth::user()->id;
+                $profileData = App\Models\User::find($id);
+            @endphp
+
             <li class="dropdown">
                 <a class="nav-link dropdown-toggle arrow-none nav-user" data-bs-toggle="dropdown" href="#" role="button"
                     aria-haspopup="false" aria-expanded="false">
                     <span class="account-user-avatar">
-                        <img src="/backend/assets/images/users/avatar-1.jpg" alt="user-image" width="32" class="rounded-circle">
+                        <img src="{{ (!empty($profileData->photo)) ? url('upload/admin_images/'.$profileData->photo) : url('upload/no_image.png') }}" alt="user-image" width="32" class="rounded-circle">
                     </span>
                     <span class="d-lg-block d-none">
-                        <h5 class="my-0 fw-normal">Thomson <i
+                        <h5 class="my-0 fw-normal">{{ $profileData->name }}<i
                                 class="ri-arrow-down-s-line d-none d-sm-inline-block align-middle"></i></h5>
                     </span>
                 </a>
@@ -95,9 +100,9 @@
                     </div>
 
                     <!-- item-->
-                    <a href="pages-profile.html" class="dropdown-item">
+                    <a href="{{ route('admin.profile') }}" class="dropdown-item">
                         <i class="ri-account-circle-line fs-18 align-middle me-1"></i>
-                        <span>My Account</span>
+                        <span>Profile</span>
                     </a>
 
                     <!-- item-->
@@ -113,13 +118,13 @@
                     </a>
 
                     <!-- item-->
-                    <a href="auth-lock-screen.html" class="dropdown-item">
+                    <a href="{{ route('admin.change.password') }}" class="dropdown-item">
                         <i class="ri-lock-password-line fs-18 align-middle me-1"></i>
-                        <span>Lock Screen</span>
+                        <span>Change Password</span>
                     </a>
 
                     <!-- item-->
-                    <a href="auth-logout-2.html" class="dropdown-item">
+                    <a href="{{ route('admin.logout') }}" class="dropdown-item">
                         <i class="ri-logout-box-line fs-18 align-middle me-1"></i>
                         <span>Logout</span>
                     </a>
