@@ -1,131 +1,45 @@
-<!doctype html>
-<html lang="en" >
+<!DOCTYPE html>
+<html lang="en" data-sidenav-size="{{ $sidenav ?? 'default' }}" data-layout-mode="{{ $layoutMode ?? 'fluid' }}" data-layout-position="{{ $position ?? 'fixed' }}" data-menu-color="{{ $menuColor ?? 'dark' }}" data-topbar-color="{{ $topbarColor ?? 'light' }}">
 
-    <head>
-        <meta charset="utf-8" />
-        <title>{{ $title }} | SYTechId</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-        <meta content="Themesbrand" name="author" />
-        <!-- App favicon -->
-        <link rel="shortcut icon" href="{{ asset('backend/assets/images/favicon.ico') }}">
+<head>
+    @include('admin.shared/title-meta', ['title' => $title])
+    @yield('css')
+    @include('admin.shared/head-css', ['mode' => $mode ?? '', 'demo' => $demo ?? ''])
+</head>
 
+<body>
+    <!-- Begin page -->
+    <div class="wrapper">
 
-        <!-- Bootstrap Css -->
-        <link href="{{ asset('backend/assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
-        <!-- Icons Css -->
-        <link href="{{ asset('backend/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-        <!-- App Css-->
-        <link href="{{ asset('backend/assets/css/app.min.css') }}"  id="app-style"  rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
+        @include('admin.shared/topbar')
+        @include('admin.shared/left-sidebar')
 
-        @stack('cssStyle')
+        <div class="content-page">
+            <div class="content">
 
-    </head>
-
-    <body data-layout="detached" data-topbar="colored">
-
-
-
-        <!-- <body data-layout="horizontal" data-topbar="dark"> -->
-
-    <div class="container-fluid">
-        <!-- Begin page -->
-        <div id="layout-wrapper">
-
-        @include('admin.body.header')
-
-        @include('admin.body.sidebar')
-<!-- Left Sidebar End -->
-
-        <!-- ============================================================== -->
-        <!-- Start right Content here -->
-        <!-- ============================================================== -->
-        <div class="main-content">
-            <div class="page-content">
-
-                <!-- start page title -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="page-title-box d-flex align-items-center justify-content-between">
-                            <h4 class="page-title mb-0 font-size-18">{{ $titlepage }}</h4>
-
-                            <div class="page-title-right">
-                                <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item active">Selamat Datang di Dashboard Admin</li>
-                                </ol>
-                            </div>
-
-                        </div>
-                    </div>
+                <!-- Start Content-->
+                <div class="container-fluid">
+                    @yield('content')
                 </div>
-                <!-- end page title -->
-
-                <!-- start row -->
-                @yield('admin_content')
-                <!-- end row -->
+                <!-- container -->
 
             </div>
+            <!-- content -->
 
-            <!-- End Page-content -->
-
-            @include('admin.body.foother')
+            @include('admin.shared/footer')
         </div>
-        <!-- end main content-->
-
-        </div>
-        <!-- END layout-wrapper -->
 
     </div>
-    <!-- end container-fluid -->
+    <!-- END wrapper -->
 
-    <!-- Right Sidebar -->
-    <!-- /Right-bar -->
+    @yield('modal')
 
-    <!-- Right bar overlay-->
-    <div class="rightbar-overlay"></div>
+    @include('admin.shared/right-sidebar')
 
-    <!-- JAVASCRIPT -->
-    <script src="{{ asset('backend/assets/libs/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('backend/assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('backend/assets/libs/metismenu/metisMenu.min.js') }}"></script>
-    <script src="{{ asset('backend/assets/libs/simplebar/simplebar.min.js') }}"></script>
-    <script src="{{ asset('backend/assets/libs/node-waves/waves.min.js') }}"></script>
-    <script src="{{ asset('backend/assets/libs/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
+    @include('admin.shared/footer-scripts')
 
-    <!-- App js -->
-    <script src="{{ asset('backend/assets/js/app.js') }}"></script>
+    {{-- @vite(['resources/js/layout.js', 'resources/js/main.js']) --}}
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src="{{ asset('backend/assets/js/code/code.js') }}"></script>
-    <script src="{{ asset('backend/assets/js/code/validate.min.js') }}"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
-    @stack('jsScript')
-
-    <script>
-        @if(Session::has('message'))
-        var type = "{{ Session::get('alert-type','info') }}"
-        switch(type){
-            case 'info':
-                toastr.info(" {{ Session::get('message') }} ");
-                break;
-
-                case 'success':
-                    toastr.success(" {{ Session::get('message') }} ");
-                    break;
-
-                    case 'warning':
-                        toastr.warning(" {{ Session::get('message') }} ");
-                        break;
-
-            case 'error':
-            toastr.error(" {{ Session::get('message') }} ");
-            break;
-        }
-        @endif
-    </script>
-
-    </body>
+</body>
 
 </html>
