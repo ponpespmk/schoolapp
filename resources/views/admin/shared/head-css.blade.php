@@ -1,6 +1,3 @@
-<!-- App favicon -->
-<link rel="shortcut icon" href="/backend/assets/images/favicon.ico">
-
 <!-- Theme Config Js -->
 <script src="/backend/assets/js/config.js"></script>
 
