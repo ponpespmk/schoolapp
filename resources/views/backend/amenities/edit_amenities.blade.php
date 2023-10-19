@@ -1,87 +1,91 @@
-@extends('admin.admin_dashboard', [
-    'title'     => 'Amenities',
-    'titlepage' => 'Edit Amenities',
-    ])
-@section('admin_content')
+@extends('admin.admin_app', ['title' => 'Edit Amenities', 'mode' => $mode ?? '', 'demo' => $demo ?? ''])
 
-<div class="row">
-    <div class="col-md-12 col-xl-8">
 
-        <div class="card">
-            <div class="card-body">
-                <h2 class="card-title mb-0 menu-title">Edit Amenities</h2>
+@section('content')
+@include('admin.shared/page-title',['page_title' => 'Amenities','sub_title' => 'Edit Amenities'])
 
-                <!-- Tab panes -->
-                <div class="p-3 text-muted">
-                    <form id="myForm" method="POST" action="{{ route('update.amenitie') }}" class="form-horizontal">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                {{-- <div class="card-header">
+                    <h4 class="header-title">Floating labels</h4>
+                    <p class="text-muted mb-0">
+                        Wrap a pair of <code>&lt;input class="form-control"&gt;</code> and
+                        <code>&lt;label&gt;</code> elements in <code>.form-floating</code> to enable
+                        floating labels with Bootstrap’s textual form fields. A <code>placeholder</code>
+                        is required on each <code>&lt;input&gt;</code> as our method of CSS-only
+                        floating labels uses the <code>:placeholder-shown</code> pseudo-element. Also
+                        note that the <code>&lt;input&gt;</code> must come first so we can utilize a
+                        sibling selector (e.g., <code>~</code>).
+                    </p>
+                </div> --}}
+                <div class="card-body">
+                    <form method="POST" id="myForm" action="{{ route('update.amenitie') }}"">
                         @csrf
                         <input type="hidden" name="id" value="{{ $amenities->id }}">
 
-                        <div class="row mt-1">
-                            <div class="col-md-12">
-                                <div class="form-group mb-3">
-                                    <label class="form-label" for="amenitis_name">Amenities Name</label>
-                                    <input type="text" name="amenitis_name" id="amenitis_name" class="form-control" value="{{ $amenities->amenitis_name }}">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                {{-- <h5 class="mb-3">Type Name</h5> --}}
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" name="amenitis_name" id="amenitis_name" placeholder="amenityname" value="{{ $amenities->amenitis_name }}">
+                                    <label for="amenitis_name">Amenities Name</label>
+                                    {{-- @error('amenitis_name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror --}}
                                 </div>
                             </div>
-                        </div>
-                        <div class="mb-0">
-                            <div>
-                                <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
-                                    Save Shanges
-                                </button>
+
+                            <div class="col-lg-6">
+
+                            </div>
+                            <div class="col-9 mt-2">
+                                <button type="submit" class="btn btn-info">Save Shanges</button>
                             </div>
                         </div>
-
                     </form>
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-
-
-</div>
+                </div> <!-- end card-body -->
+            </div> <!-- end card -->
+        </div><!-- end col -->
+    </div><!-- end row -->
 
 @endsection
 
-<!-- Styles .css -->
-@push('cssStyle')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-@endpush
+@section('script')
 
-<!-- Script .js -->
-@push('jsScript')
-<script type="text/javascript">
-    $(document).ready(function (){
-        $('#myForm').validate({
-            rules: {
-                amenitis_name: {
-                    required : true,
+    <script src="/backend/assets/js/code/validate.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function (){
+            $('#myForm').validate({
+                rules: {
+                    amenitis_name: {
+                        required : true,
+                    },
+
                 },
+                messages :{
+                    amenitis_name: {
+                        required : 'Please Enter Amenities Name',
+                    },
 
-            },
-            messages :{
-                amenitis_name: {
-                    required : 'Please Enter Amenities Name',
+
                 },
-
-
-            },
-            errorElement : 'span',
-            errorPlacement: function (error,element) {
-                error.addClass('invalid-feedback');
-                element.closest('.form-group').append(error);
-            },
-            highlight : function(element, errorClass, validClass){
-                $(element).addClass('is-invalid');
-            },
-            unhighlight : function(element, errorClass, validClass){
-                $(element).removeClass('is-invalid');
-            },
+                errorElement : 'span',
+                errorPlacement: function (error,element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-floating').append(error);
+                },
+                highlight : function(element, errorClass, validClass){
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight : function(element, errorClass, validClass){
+                    $(element).removeClass('is-invalid');
+                },
+            });
         });
-    });
 
-</script>
-@endpush
+    </script>
+
+@endsection
+

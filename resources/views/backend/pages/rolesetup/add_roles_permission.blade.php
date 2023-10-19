@@ -1,125 +1,133 @@
-@extends('admin.admin_dashboard', [
-    'title'     => 'Roles in Permission',
-    'titlepage' => 'Add Roles in Permission',
-    ])
-@section('admin_content')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+@extends('admin.admin_app', ['title' => 'Add Roles in Permission', 'mode' => $mode ?? '', 'demo' => $demo ?? ''])
 
-<div class="row">
-    <div class="col-md-12 col-xl-12">
 
-        <div class="card text-bg-dark mb-3">
-            <div class="card-body">
+@section('content')
+@include('admin.shared/page-title',['page_title' => 'Add Roles in Permission','sub_title' => 'Role & Permission'])
 
-                <!-- Tab panes -->
-                <div class="p-3 text-muted">
-                    <form method="POST" action="{{ route('role.permission.store') }}" class="form-horizontal">
-                        @csrf
-
-                        <div class="row mt-1">
-                            <div class="col-md-12">
-                                <div class="mb-3">
-                                    <label class="form-label text-light" for="role_id">Roles Name</label>
-                                    <select name="role_id" id="role_id" class="form-select" aria-label="Default select example">
-                                        <option selected="">Select Group</option>
-                                        @foreach ($roles as $role)
-                                            <option value="{{ $role->id }}">{{ $role->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="col-md-12">
-                                <div class="mb-3">
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkmain">
-                                        <label class="form-check-label text-light" for="checkmain">
-                                            Permission All
-                                        </label>
-                                        <br>
-                                    </div>
-                                </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                {{-- <div class="card-header">
+                    <h4 class="header-title">Floating labels</h4>
+                    <p class="text-muted mb-0">
+                        Wrap a pair of <code>&lt;input class="form-control"&gt;</code> and
+                        <code>&lt;label&gt;</code> elements in <code>.form-floating</code> to enable
+                        floating labels with Bootstrap’s textual form fields. A <code>placeholder</code>
+                        is required on each <code>&lt;input&gt;</code> as our method of CSS-only
+                        floating labels uses the <code>:placeholder-shown</code> pseudo-element. Also
+                        note that the <code>&lt;input&gt;</code> must come first so we can utilize a
+                        sibling selector (e.g., <code>~</code>).
+                    </p>
+                </div> --}}
+                <div class="card-header">
+                <form method="POST" id="addPermissionForm" action="{{ route('role.permission.store') }}">
+                    @csrf
+                        <div class="col-lg-6">
+                            {{-- <h5 class="mb-3">Selects</h5> --}}
+                            <div class="form-floating">
+                                <select class="form-select" name="role_id" id="role_id" aria-label="Floating label select example">
+                                    <option selected="">Select Group</option>
+                                    @foreach ($roles as $role)
+                                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="role_id">Roles Name</label>
                             </div>
                         </div>
 
-                        {{-- start table --}}
-
-                        <div class="table-responsive">
-                            <table class="table mb-0 table-dark text-capitalize">
-
-
-                        @foreach ($permission_groups as $group)
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                {{ $group->group_name }}
-                                            </label>
-                                        </td>
-                                        @php
-                                            $permissions = App\Models\User::getpermissionByGroupName($group->group_name)
-                                        @endphp
-
-
-                                        <td colspan="4">
-                                            @foreach ($permissions as $permission)
-                                            <input class="form-check-input" type="checkbox" value="{{ $permission->id }}" name="permission[]" id="check{{ $permission->id }}">
-                                            <label class="form-check-label" for="check{{ $permission->id }}">
-                                                {{ $permission->name }}
-                                            </label><br>
-                                            @endforeach
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                @endforeach
-                            </table>
-                        </div>
-                        {{-- end table --}}
-
-
-                        <div class="mt-3">
-                            <div>
-                                <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
-                                    Save Shanges
-                                </button>
+                        <div class="col-lg-12 mt-3">
+                            <div class="form-check form-checkbox-success mb-2">
+                                <input type="checkbox" class="form-check-input" id="checkmain">
+                                <label class="form-check-label" for="checkmain">Permission All</label>
                             </div>
                         </div>
-
-                    </form>
                 </div>
+                <div class="card-body">
+                    @foreach ($permission_groups as $group)
+                    <div class="row">
+                        <div class="col-lg-3">
 
-            </div>
-        </div>
+                            <div class="form-check form-checkbox-warning mb-2 text-capitalize">
+                                <input type="checkbox" class="form-check-input" id="{{ $group->group_name }}chec" >
+                                <label class="form-check-label" for="{{ $group->group_name }}chec">{{ $group->group_name }}</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
 
-    </div>
+                            @php
+                                $permissions = App\Models\User::getpermissionByGroupName($group->group_name)
+                            @endphp
 
+                            @foreach ($permissions as $permission)
+                            <div class="form-check form-checkbox-info mb-2 text-capitalize">
+                                <input type="checkbox" name="permission[]" class="form-check-input" value="{{ $permission->id }}" id="check{{ $permission->id }}">
+                                <label class="form-check-label" for="check{{ $permission->id }}">
+                                    {{ $permission->name }}
+                                </label>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endforeach
 
-</div>
+                        <div class="col-9 mt-2">
+                            <button type="submit" class="btn btn-info">Save</button>
+                        </div>
+                </div> <!-- end card-body -->
+                </form>
+            </div> <!-- end card -->
+        </div><!-- end col -->
+    </div><!-- end row -->
 
 @endsection
 
-<!-- Styles .css -->
-@push('cssStyle')
+@section('script')
 
-@endpush
+    <script src="/backend/assets/js/code/validate.min.js"></script>
 
-<!-- Script .js -->
-@push('jsScript')
+    <script type="text/javascript">
+        $(document).ready(function (){
+            $('#addPermissionForm').validate({
+                rules: {
+                    name: {
+                        required : true,
+                    },
 
-<script type="text/javascript">
+                },
+                messages :{
+                    name: {
+                        required : 'Please Enter Permission Name',
+                    },
 
-    $('#checkmain').click(function() {
 
-        if ($(this).is(':checked')) {
-            $('input[type=checkbox]').prop('checked',true);
-        } else {
-            $('input[type=checkbox]').prop('checked',false);
-        }
-    });
+                },
+                errorElement : 'span',
+                errorPlacement: function (error,element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-floating').append(error);
+                },
+                highlight : function(element, errorClass, validClass){
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight : function(element, errorClass, validClass){
+                    $(element).removeClass('is-invalid');
+                },
+            });
+        });
 
-</script>
+    </script>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="text/javascript">
 
-@endpush
+        $('#checkmain').click(function() {
+
+            if ($(this).is(':checked')) {
+                $('input[type=checkbox]').prop('checked',true);
+            } else {
+                $('input[type=checkbox]').prop('checked',false);
+            }
+        });
+
+    </script>
+
+@endsection

@@ -5,6 +5,8 @@
     @include('admin.shared/title-meta', ['title' => $title])
     @yield('css')
     @include('admin.shared/head-css', ['mode' => $mode ?? '', 'demo' => $demo ?? ''])
+    @yield('toast-css')
+
 </head>
 
 <body>
@@ -36,7 +38,13 @@
 
     @include('admin.shared/right-sidebar')
 
-    @include('admin.shared/footer-scripts')
+    <script src="/backend/assets/js/vendor.min.js"></script>
+
+    @yield('toast-script')
+
+    @yield('script')
+
+    <script src="/backend/assets/js/app.min.js"></script>
 
     {{-- @vite(['resources/js/layout.js', 'resources/js/main.js']) --}}
 

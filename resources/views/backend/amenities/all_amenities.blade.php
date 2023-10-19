@@ -1,28 +1,36 @@
-@extends('admin.admin_dashboard', [
-    'title'     => 'Amenities',
-    'titlepage' => 'All Amenities',
-    ])
-@section('admin_content')
+@extends('admin.admin_app', ['title' => 'All Amenities', 'mode' => $mode ?? '', 'demo' => $demo ?? ''])
+
+@section('css')
+    <!-- Datatables css -->
+    <link href="/backend/assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/assets/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/assets/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/assets/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/assets/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+@endsection
+
+@section('content')
+@include('admin.shared/page-title',['page_title' => 'All Amenities','sub_title' => 'Amenities'])
+
 
 <div class="row">
-
     <div class="col-12">
         <div class="card">
+            <div class="card-header">
+                {{-- <h4 class="header-title">Scroll - Horizontal</h4>
+                <p class="text-muted mb-0">
+                    DataTables has the ability to show tables with horizontal scrolling, which is
+                    very useful for when you have a wide
+                    table, but want to constrain it to a limited horizontal display area.
+                </p><br> --}}
+                <a href="{{ route('add.amenitie') }}" class="btn btn-info">
+                    <i class="ri-add-circle-line me-1"></i>
+                    <span>Add Amenities</span> </a>
+            </div>
             <div class="card-body">
 
-                <div class="col-lg-6 mb-3">
-                    <a href="{{ route('add.amenitie') }}" class="btn btn-info waves-effect waves-light">
-                        <i class="bx bx-add-to-queue font-size-16 align-middle me-2"></i>
-                        Add Amenities
-                    </a>
-                </div>
-
-                <h4 class="card-title">Amenities All</h4>
-                <p class="card-title-desc">
-                </p>
-
-                <table id="datatable" class="table table-bordered dt-responsive nowrap"
-                    style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                <table id="scroll-horizontal-datatable" class="table table-striped w-100 nowrap">
                     <thead>
                         <tr>
                             <th>Sl</th>
@@ -30,20 +38,17 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         @foreach ($amenities as $key => $item)
                         <tr>
                             <td>{{ $key+1 }}</td>
                             <td>{{ $item->amenitis_name }}</td>
                             <td>
-                                <a href="{{ route('edit.amenitie',$item->id) }}" class="btn btn-sm btn-rounded btn-warning waves-effect waves-light">
-                                    <i class="bx bxs-edit-alt font-size-16 align-middle me-2"></i>
-                                    Edit
+                                <a href="{{ route('edit.amenitie',$item->id) }}" class="btn btn-primary btn-sm" title="Edit">
+                                    <i class="ri-edit-2-line"></i>
                                 </a>
-                                <a href="{{ route('delete.amenitie',$item->id) }}" class="btn btn-sm btn-rounded btn-danger waves-effect waves-light" id="delete">
-                                    <i class="bx bxs-trash font-size-16 align-middle me-2"></i>
-                                    Delete
+                                <a href="{{ route('delete.amenitie',$item->id) }}" class="btn btn-danger btn-sm" id="delete" title="Delete">
+                                    <i class="ri-delete-bin-line "></i>
                                 </a>
                             </td>
                         </tr>
@@ -51,11 +56,33 @@
                     </tbody>
                 </table>
 
-            </div>
-        </div>
-    </div>
-    <!-- end col -->
-</div>
-<!-- end row -->
+            </div> <!-- end card body-->
+        </div> <!-- end card -->
+    </div><!-- end col-->
+</div> <!-- end row-->
+@endsection
+
+@section('toast-script')
+    @include('admin.shared.toast-scripts')
+@endsection
+
+@section('script')
+<!-- Datatables js -->
+<script src="/backend/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/backend/assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+<script src="/backend/assets/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/backend/assets/vendor/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+<script src="/backend/assets/vendor/datatables.net-fixedcolumns-bs5/js/fixedColumns.bootstrap5.min.js"></script>
+{{-- <script src="/backend/assets/vendor/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script> --}}
+<script src="/backend/assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/backend/assets/vendor/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+<script src="/backend/assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="/backend/assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+<script src="/backend/assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="/backend/assets/vendor/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+<script src="/backend/assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
+
+<!-- Datatable Demo Aapp js -->
+<script src="/backend/assets/js/pages/datatable.init.js"></script>
 
 @endsection

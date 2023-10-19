@@ -164,6 +164,7 @@ class AdminController extends Controller
         $user->email        = $request->email;
         $user->phone        = $request->phone;
         $user->address      = $request->address;
+        $user->password     = Hash::make($request->password);
         $user->role         = 'admin';
         $user->status       = 'active';
         $user->save();
@@ -175,7 +176,7 @@ class AdminController extends Controller
         }
 
         $notification = array(
-            'message'       => 'New Admin User Updated Successfully!',
+            'message'       => 'Admin User Updated Successfully!',
             'alert-type'    => 'success'
         );
         return redirect()->route('all.admin')->with($notification);

@@ -1,9 +1,9 @@
-@extends('admin.admin_app', [
-    'title'     => 'Home',
-    'titlepage' => 'Admin Dashboard',
-    ])
-@section('admin_content')
+@extends('admin.admin_app', ['title' => 'Admin Dashboard', 'mode' => $mode ?? '', 'demo' => $demo ?? ''])
 
-<h1>Ini Dashboard</h1>
-<!-- end row -->
+
+@section('content')
+@include('admin.shared/page-title',['page_title' => 'Admin Dashboard','sub_title' => 'Admin'])
+
+<h1>Dashboard Admin</h1>
+
 @endsection

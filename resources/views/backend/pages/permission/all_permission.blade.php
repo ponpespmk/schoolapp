@@ -1,32 +1,38 @@
-@extends('admin.admin_dashboard', [
-    'title'     => 'Permission',
-    'titlepage' => 'All Permission',
-    ])
-@section('admin_content')
+@extends('admin.admin_app', ['title' => 'All Permission', 'mode' => $mode ?? '', 'demo' => $demo ?? ''])
+
+@section('css')
+    <!-- Datatables css -->
+    <link href="/backend/assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/assets/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/assets/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/assets/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="/backend/assets/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+@endsection
+
+@section('content')
+@include('admin.shared/page-title',['page_title' => 'All Permission','sub_title' => 'Permission'])
+
 
 <div class="row">
-
     <div class="col-12">
         <div class="card">
+            <div class="card-header">
+                {{-- <h4 class="header-title">Scroll - Horizontal</h4>
+                <p class="text-muted mb-0">
+                    DataTables has the ability to show tables with horizontal scrolling, which is
+                    very useful for when you have a wide
+                    table, but want to constrain it to a limited horizontal display area.
+                </p><br> --}}
+                <div class="d-flex flex-wrap gap-2">
+                    <a href="{{ route('add.permission') }}" class="btn btn-info"><i class="ri-add-circle-line"></i> Add Permission </a>
+                    <a href="{{ route('import.permission') }}" class="btn btn-outline-success"><i class="ri-file-excel-2-line"></i> Exel Import </a>
+                    <a href="{{ route('export') }}" class="btn btn-outline-success"><i class="ri-file-excel-2-line"></i> Exel Export</a>
+                </div>
+            </div>
             <div class="card-body">
 
-                <div class="col-lg-12 mb-3 button-items">
-                    <a href="{{ route('add.permission') }}" class="btn btn-info waves-effect waves-light">
-                        <i class="bx bx-add-to-queue font-size-16 align-middle me-2"></i>
-                        Add Permission
-                    </a>
-                    <a href="{{ route('import.permission') }}" class="btn btn-rounded btn-outline-success waves-effect waves-light">
-                        <i class="bx bx-import font-size-16 align-middle me-2"></i>
-                        Import
-                    </a>
-                    <a href="{{ route('export') }}" class="btn btn-rounded btn-outline-warning waves-effect waves-light">
-                        <i class="bx bx-export font-size-16 align-middle me-2"></i>
-                        Export
-                    </a>
-                </div>
-
-                <table id="datatable" class="table table-bordered dt-responsive nowrap"
-                    style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                <table id="scroll-horizontal-datatable" class="table table-striped w-100 nowrap">
                     <thead>
                         <tr>
                             <th>Sl</th>
@@ -35,7 +41,6 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         @foreach ($permissions as $key => $item)
                         <tr>
@@ -43,13 +48,11 @@
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->group_name }}</td>
                             <td>
-                                <a href="{{ route('edit.permission',$item->id) }}" class="btn btn-sm btn-rounded btn-warning waves-effect waves-light">
-                                    <i class="bx bxs-edit-alt font-size-16 align-middle me-2"></i>
-                                    Edit
+                                <a href="{{ route('edit.permission',$item->id) }}" class="btn btn-primary btn-sm" title="Edit">
+                                    <i class="ri-edit-2-line"></i>
                                 </a>
-                                <a href="{{ route('delete.permission',$item->id) }}" class="btn btn-sm btn-rounded btn-danger waves-effect waves-light" id="delete">
-                                    <i class="bx bxs-trash font-size-16 align-middle me-2"></i>
-                                    Delete
+                                <a href="{{ route('delete.permission',$item->id) }}" class="btn btn-danger btn-sm" id="delete" title="Delete">
+                                    <i class="ri-delete-bin-line "></i>
                                 </a>
                             </td>
                         </tr>
@@ -57,32 +60,33 @@
                     </tbody>
                 </table>
 
-            </div>
-        </div>
-    </div>
-    <!-- end col -->
-</div>
-<!-- end row -->
-
+            </div> <!-- end card body-->
+        </div> <!-- end card -->
+    </div><!-- end col-->
+</div> <!-- end row-->
 @endsection
 
+@section('toast-script')
+    @include('admin.shared.toast-scripts')
+@endsection
 
-<!-- Styles .css -->
-@push('cssStyle')
+@section('script')
+<!-- Datatables js -->
+<script src="/backend/assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/backend/assets/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+<script src="/backend/assets/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/backend/assets/vendor/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+<script src="/backend/assets/vendor/datatables.net-fixedcolumns-bs5/js/fixedColumns.bootstrap5.min.js"></script>
+{{-- <script src="/backend/assets/vendor/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script> --}}
+<script src="/backend/assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/backend/assets/vendor/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+<script src="/backend/assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="/backend/assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+<script src="/backend/assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="/backend/assets/vendor/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+<script src="/backend/assets/vendor/datatables.net-select/js/dataTables.select.min.js"></script>
 
-    <!-- DataTables -->
-    <link href="{{ asset('backend/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('backend/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+<!-- Datatable Demo Aapp js -->
+<script src="/backend/assets/js/pages/datatable.init.js"></script>
 
-@endpush
-
-<!-- Script .js -->
-@push('jsScript')
-    <!-- Start Required datatable js -->
-    <script src="{{ asset('backend/assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('backend/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <!-- Datatable init js -->
-    <script src="{{ asset('backend/assets/js/pages/datatables.init.js') }}"></script>
-    <!-- End DataTable -->
-@endpush
-
+@endsection

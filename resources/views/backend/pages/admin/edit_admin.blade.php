@@ -1,110 +1,135 @@
-@extends('admin.admin_dashboard', [
-    'title'     => 'Admin',
-    'titlepage' => 'Add Admin',
-    ])
-@section('admin_content')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+@extends('admin.admin_app', ['title' => 'Edit Admin', 'mode' => $mode ?? '', 'demo' => $demo ?? ''])
 
-<div class="row">
-    <div class="col-lg-12">
 
-        <div class="card">
-            <div class="card-body">
+@section('content')
+@include('admin.shared/page-title',['page_title' => 'Edit Admin','sub_title' => 'Admin'])
 
-                <!-- Tab panes -->
-                <div class="p-3 text-muted">
-                    <form method="POST" action="{{ route('update.admin',$user->id) }}" class="form-horizontal">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                {{-- <div class="card-header">
+                    <h4 class="header-title">Floating labels</h4>
+                    <p class="text-muted mb-0">
+                        Wrap a pair of <code>&lt;input class="form-control"&gt;</code> and
+                        <code>&lt;label&gt;</code> elements in <code>.form-floating</code> to enable
+                        floating labels with Bootstrap’s textual form fields. A <code>placeholder</code>
+                        is required on each <code>&lt;input&gt;</code> as our method of CSS-only
+                        floating labels uses the <code>:placeholder-shown</code> pseudo-element. Also
+                        note that the <code>&lt;input&gt;</code> must come first so we can utilize a
+                        sibling selector (e.g., <code>~</code>).
+                    </p>
+                </div> --}}
+                <div class="card-body">
+                    <form method="POST" id="editAdminForm" action="{{ route('update.admin',$user->id) }}">
                         @csrf
-
                         <div class="row">
                             <div class="col-lg-6">
-                                <div class="row mt-1">
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="username">User Name</label>
-                                            <input type="text" name="username" id="username" class="form-control" value="{{ $user->username }}">
-                                        </div>
-                                    </div>
+                                {{-- <h5 class="mb-3">Type Name</h5> --}}
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" id="username" placeholder="username" value="{{ $user->username }}">
+                                    <label for="username">User Name</label>
+                                    @error('username')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
-                                <div class="row mt-1">
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="name">Name</label>
-                                            <input type="text" name="name" id="name" class="form-control" value="{{ $user->name }}">
-                                        </div>
-                                    </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="name" value="{{ $user->name }}">
+                                    <label for="name">Name</label>
+                                    @error('name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
-                                <div class="row mt-1">
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="email">Email</label>
-                                            <input type="email" name="email" id="email" class="form-control" value="{{ $user->email }}">
-                                        </div>
-                                    </div>
+                                <div class="form-floating mb-3">
+                                    <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="email" value="{{ $user->email }}">
+                                    <label for="email">Email</label>
+                                    @error('email')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" placeholder="phone" data-toggle="input-mask" data-mask-format="+62 000-0000-0000" maxlength="17" value="{{ $user->phone }}">
+                                    <label for="phone">Phone</label>
+                                    <span class="fs-13 text-muted">Ketikkan Tanpa Angka "0" di Awal</span>
+                                    @error('phone')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control @error('address') is-invalid @enderror" name="address" id="address" placeholder="address" value="{{ $user->address }}">
+                                    <label for="address">Address</label>
+                                    @error('address')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="password" value="{{ $user->password }}">
+                                    <label for="password">Password</label>
+                                    @error('password')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                {{-- <h5 class="mb-3">Selects</h5> --}}
+                                <div class="form-floating">
+                                    <select class="form-select" name="roles" id="role_id" aria-label="Floating label select example">
+                                        <option selected="">Select Role</option>
+                                    @foreach ($roles as $role)
+                                        <option value="{{ $role->id }}" {{ $user->hasRole($role->name) ? 'selected' : '' }}>{{ $role->name }}</option>
+                                    @endforeach
+                                    </select>
+                                    <label for="role_id">Role Name</label>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="row mt-1">
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="phone">Phone</label>
-                                            <input type="text" name="phone" id="phone" class="form-control" value="{{ $user->phone }}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mt-1">
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="address">Address</label>
-                                            <input type="text" name="address" id="address" class="form-control" value="{{ $user->address }}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mt-1">
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label class="form-label text-light" for="role_id">Roles Name</label>
-                                            <select name="roles" id="role_id" class="form-select" aria-label="Default select example">
-                                                <option selected="">Select Role</option>
-                                                @foreach ($roles as $role)
-                                                    <option value="{{ $role->id }}" {{ $user->hasRole($role->name) ? 'selected' : '' }}>{{ $role->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
+
+                            <div class="col-9 mt-2">
+                                <button type="submit" class="btn btn-info"><i class="ri-save-line me-1 fs-16 lh-1"></i>Save</button>
                             </div>
                         </div>
-
-                        <div class="mb-0">
-                            <div>
-                                <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
-                                    Save Change
-                                </button>
-                            </div>
-                        </div>
-
                     </form>
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-
-
-</div>
+                </div> <!-- end card-body -->
+            </div> <!-- end card -->
+        </div><!-- end col -->
+    </div><!-- end row -->
 
 @endsection
 
-<!-- Styles .css -->
-@push('cssStyle')
+@section('script')
 
-@endpush
+    <!-- Input Mask Plugin js -->
+    <script src="/backend/assets/vendor/jquery-mask-plugin/jquery.mask.min.js"></script>
 
-<!-- Script .js -->
-@push('jsScript')
+    <script src="/backend/assets/js/code/validate.min.js"></script>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function (){
+            $('#addPermissionForm').validate({
+                rules: {
+                    name: {
+                        required : true,
+                    },
 
-@endpush
+                },
+                messages :{
+                    name: {
+                        required : 'Please Enter Permission Name',
+                    },
+
+
+                },
+                errorElement : 'span',
+                errorPlacement: function (error,element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-floating').append(error);
+                },
+                highlight : function(element, errorClass, validClass){
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight : function(element, errorClass, validClass){
+                    $(element).removeClass('is-invalid');
+                },
+            });
+        });
+
+    </script>
+
+@endsection
