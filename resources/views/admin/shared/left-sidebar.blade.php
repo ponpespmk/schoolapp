@@ -47,13 +47,13 @@
                 </a>
                 <div class="collapse" id="sidebarPages">
                     <ul class="side-nav-second-level">
-                        @if (Auth::user()->can('type.all'))
+                        @if (Auth::user()->can('all.type'))
                         <li>
                             <a href="{{ route('all.type') }}">All Type</a>
                         </li>
                         @endif
 
-                        @if (Auth::user()->can('type.add'))
+                        @if (Auth::user()->can('add.type'))
                         <li>
                             <a href="{{ route('add.type') }}">Add Type</a>
                         </li>
@@ -75,13 +75,13 @@
                 </a>
                 <div class="collapse" id="sidebarPagesAuth">
                     <ul class="side-nav-second-level">
-                        @if (Auth::user()->can('amenities.all'))
+                        @if (Auth::user()->can('all.amenities'))
                         <li>
                             <a href="{{ route('all.amenitie') }}">All Amenities</a>
                         </li>
                         @endif
 
-                        @if (Auth::user()->can('amenities.add'))
+                        @if (Auth::user()->can('add.amenities'))
                         <li>
                             <a href="{{ route('add.amenitie') }}">Add Amenities</a>
                         </li>
