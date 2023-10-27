@@ -44,7 +44,7 @@
                                         <option value="history">History</option>
                                         <option value="post">Post</option>
                                         <option value="property">Property</option>
-                                        <option value="role">Role & Permission</option>
+                                        <option value="rolespermission">Role & Permission</option>
                                         <option value="site">Site</option>
                                         <option value="smtp">STTP</option>
                                         <option value="state">State</option>

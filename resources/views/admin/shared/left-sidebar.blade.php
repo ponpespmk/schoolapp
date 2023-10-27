@@ -92,7 +92,7 @@
 
         @endif
 
-        @if (Auth::user()->can('role.menu'))
+        @if (Auth::user()->can('rolespermission.menu'))
 
             <li class="side-nav-title">Role & Permission</li>
 

@@ -68,12 +68,12 @@ Route::middleware(['auth','roles:admin'])->group(function(){
 
     //Amenities All Route
     Route::controller(PropertyTypeController::class)->group(function(){
-        Route::get('/all/amenitie','AllAmenitie')->name('all.amenitie')->middleware('permission:all.amenitie');
-        Route::get('/add/amenitie','AddAmenitie')->name('add.amenitie')->middleware('permission:add.amenitie');
-        Route::post('/store/amenitie','StoreAmenitie')->name('store.amenitie')->middleware('permission:store.amenitie');
-        Route::get('/edit/amenitie/{id}','EditAmenitie')->name('edit.amenitie')->middleware('permission:edit.amenitie');
-        Route::post('/update/amenitie','UpdateAmenitie')->name('update.amenitie')->middleware('permission:update.amenitie');
-        Route::get('/delete/amenitie/{id}','DeleteAmenitie')->name('delete.amenitie')->middleware('permission:delete.amenitie');
+        Route::get('/all/amenitie','AllAmenitie')->name('all.amenitie')->middleware('permission:all.amenities');
+        Route::get('/add/amenitie','AddAmenitie')->name('add.amenitie')->middleware('permission:add.amenities');
+        Route::post('/store/amenitie','StoreAmenitie')->name('store.amenitie');
+        Route::get('/edit/amenitie/{id}','EditAmenitie')->name('edit.amenitie')->middleware('permission:edit.amenities');
+        Route::post('/update/amenitie','UpdateAmenitie')->name('update.amenitie')->middleware('permission:update.amenities');
+        Route::get('/delete/amenitie/{id}','DeleteAmenitie')->name('delete.amenitie')->middleware('permission:delete.amenities');
     });
 
     //Permission All Route
@@ -84,16 +84,24 @@ Route::middleware(['auth','roles:admin'])->group(function(){
         Route::get('/add/permission','AddPermission')->name('add.permission')
             // ->middleware('permission:add.permission')
             ;
-        Route::post('/store/permission','StorePermission')->name('store.permission')->middleware('permission:store.permission');
+        Route::post('/store/permission','StorePermission')->name('store.permission')
+            // ->middleware('permission:store.permission')
+            ;
         Route::get('/edit/permission/{id}','EditPermission')->name('edit.permission')
             // ->middleware('permission:edit.permission')
             ;
         Route::post('/update/permission','UpdatePermission')->name('update.permission')
             // ->middleware('permission:update.permission')
             ;
-        Route::get('/delete/permission/{id}','DeletePermission')->name('delete.permission')->middleware('permission:delete.permission');
-        Route::get('/import/permission','ImportPermission')->name('import.permission')->middleware('permission:import.permission');
-        Route::get('/export','Export')->name('export')->middleware('permission:export.permission');
+        Route::get('/delete/permission/{id}','DeletePermission')->name('delete.permission')
+            // ->middleware('permission:delete.permission')
+            ;
+        Route::get('/import/permission','ImportPermission')->name('import.permission')
+            // ->middleware('permission:import.permission')
+            ;
+        Route::get('/export','Export')->name('export')
+            // ->middleware('permission:export.permission')
+            ;
         Route::post('/import','Import')->name('import');
     });
 
@@ -102,12 +110,12 @@ Route::middleware(['auth','roles:admin'])->group(function(){
         Route::get('/all/roles','AllRoles')->name('all.roles')
             // ->middleware('permission:all.roles')
             ;
-        Route::get('/add/roles','AddRoles')->name('add.roles')->middleware('permission:add.roles');
-        Route::post('/store/roles','StoreRoles')->name('store.roles')->middleware('permission:store.roles');
-        Route::get('/edit/roles/{id}','EditRoles')->name('edit.roles')->middleware('permission:edit.roles');
-        Route::post('/update/roles','UpdateRoles')->name('update.roles')->middleware('permission:update.roles');
-        Route::get('/delete/roles/{id}','DeleteRoles')->name('delete.roles')->middleware('permission:delete.roles');
-        Route::get('/import/roles','ImportRoles')->name('import.roles')->middleware('permission:import.roles');
+        Route::get('/add/roles','AddRoles')->name('add.roles')->middleware('permission:add.role');
+        Route::post('/store/roles','StoreRoles')->name('store.roles')->middleware('permission:store.role');
+        Route::get('/edit/roles/{id}','EditRoles')->name('edit.roles')->middleware('permission:edit.role');
+        Route::post('/update/roles','UpdateRoles')->name('update.roles')->middleware('permission:update.role');
+        Route::get('/delete/roles/{id}','DeleteRoles')->name('delete.roles')->middleware('permission:delete.role');
+        Route::get('/import/roles','ImportRoles')->name('import.roles')->middleware('permission:import.role');
 
         Route::get('/add/roles/permission','AddRolesPermission')->name('add.roles.permission')
             // ->middleware('permission:add.roles.permission')

@@ -46,13 +46,13 @@
                             <td>{{ $item->type_name }}</td>
                             <td>{{ $item->type_icon }}</td>
                             <td>
-                                @if (Auth::user()->can('type.edit'))
+                                @if (Auth::user()->can('edit.type'))
                                 <a href="{{ route('edit.type',$item->id) }}" class="btn btn-primary btn-sm" title="Edit">
                                     <i class="ri-edit-2-line"></i>
                                 </a>
                                 @endif
 
-                                @if (Auth::user()->can('type.delete'))
+                                @if (Auth::user()->can('delete.type'))
                                 <a href="{{ route('delete.type',$item->id) }}" class="btn btn-danger btn-sm" id="delete" title="Delete">
                                     <i class="ri-delete-bin-line "></i>
                                 </a>
