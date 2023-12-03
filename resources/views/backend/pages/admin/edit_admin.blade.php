@@ -61,13 +61,13 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="form-floating mb-3">
+                                {{-- <div class="form-floating mb-3">
                                     <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="password" value="{{ $user->password }}">
                                     <label for="password">Password</label>
                                     @error('password')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                </div>
+                                </div> --}}
 
                                 {{-- <h5 class="mb-3">Selects</h5> --}}
                                 <div class="form-floating">

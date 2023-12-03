@@ -109,7 +109,7 @@ class AdminController extends Controller
 
     public function AllAdmin(){
 
-        $alladmin = User::where('role','admin')->get();
+        $alladmin = User::all();
         return view('backend.pages.admin.all_admin',compact('alladmin'));
 
     }// End Method
@@ -164,7 +164,7 @@ class AdminController extends Controller
         $user->email        = $request->email;
         $user->phone        = $request->phone;
         $user->address      = $request->address;
-        $user->password     = Hash::make($request->password);
+        // $user->password     = Hash::make($request->password);
         $user->role         = 'admin';
         $user->status       = 'active';
         $user->save();
@@ -198,4 +198,5 @@ class AdminController extends Controller
         return redirect()->back()->with($notification);
 
     }// End Method
+
 }

@@ -128,8 +128,38 @@
                 <div class="collapse" id="sidebarExtendedUI">
                     <ul class="side-nav-second-level">
                         <li>
+                            @if (Auth::user()->can('all.admin'))
                             <li><a href="{{ route('all.admin') }}">All Admin</a></li>
+                            @endif
+
+                            @if (Auth::user()->can('add.admin'))
                             <li><a href="{{ route('add.admin') }}">Add Admin</a></li>
+                            @endif
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        @endif
+
+        @if (Auth::user()->can('superadmin.menu'))
+
+            <li class="side-nav-item">
+                <a data-bs-toggle="collapse" href="#sidebarExtendedUI" aria-expanded="false"
+                    aria-controls="sidebarExtendedUI" class="side-nav-link">
+                    <i class=" ri-user-star-line"></i>
+                    <span>Manage Super Admin</span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <div class="collapse" id="sidebarExtendedUI">
+                    <ul class="side-nav-second-level">
+                        <li>
+                            @if (Auth::user()->can('all.superadmin'))
+                            <li><a href="{{ route('all.superadmin') }}">All Super Admin</a></li>
+                            @endif
+
+                            @if (Auth::user()->can('add.superadmin'))
+                            <li><a href="{{ route('add.superadmin') }}">Add Super Admin</a></li>
+                            @endif
                         </li>
                     </ul>
                 </div>

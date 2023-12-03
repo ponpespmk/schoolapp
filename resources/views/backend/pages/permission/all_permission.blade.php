@@ -32,7 +32,7 @@
             </div>
             <div class="card-body">
 
-                <table id="scroll-horizontal-datatable" class="table table-striped w-100 nowrap">
+                <table id="alternative-page-datatable" class="table table-striped w-100 nowrap">
                     <thead>
                         <tr>
                             <th>Sl</th>

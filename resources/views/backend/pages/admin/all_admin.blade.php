@@ -30,7 +30,7 @@
             </div>
             <div class="card-body">
 
-                <table id="scroll-horizontal-datatable" class="table table-striped w-100 nowrap">
+                <table id="alternative-page-datatable" class="table table-striped w-100 nowrap">
                     <thead>
                         <tr>
                             <th>Sl</th>
@@ -55,7 +55,7 @@
                             <td>
 
                                 @foreach ($item->roles as $role)
-                                    <span class="badge {{ $role->name == 'SuperAdmin' ? 'bg-primary' : 'bg-secondary' }}">{{ $role->name }}</span>
+                                    <span class="badge {{ $role->name == 'superadmin' ? 'bg-primary' : 'bg-secondary' }}">{{ $role->name }}</span>
                                 @endforeach
                             </td>
                             <td>
