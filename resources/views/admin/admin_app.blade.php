@@ -48,6 +48,13 @@
 
     {{-- @vite(['resources/js/layout.js', 'resources/js/main.js']) --}}
 
+    {{-- <script>
+        window.onload = function() {
+            document.getElementById('label').className = 'text-warning';
+        };
+    </script> --}}
+
+
 </body>
 
 </html>

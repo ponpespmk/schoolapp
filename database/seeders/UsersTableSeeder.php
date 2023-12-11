@@ -24,6 +24,71 @@ class UsersTableSeeder extends Seeder
 
         DB::table('permissions')->insert([
 
+            ['name'=> 'labelletter.menu', 'guard_name' => 'web', 'group_name' => 'letter',],
+            //Letters
+            ['name'=> 'letter.menu', 'guard_name' => 'web', 'group_name' => 'letter',],
+            ['name'=> 'in.letter', 'guard_name' => 'web', 'group_name' => 'letter',],
+            ['name'=> 'out.letter', 'guard_name' => 'web', 'group_name' => 'letter',],
+            //End Letters
+
+            //Buku Agenda
+            ['name'=> 'agendabook.menu', 'guard_name' => 'web', 'group_name' => 'letter',],
+            ['name'=> 'in.agendabook', 'guard_name' => 'web', 'group_name' => 'letter',],
+            ['name'=> 'out.agendabook', 'guard_name' => 'web', 'group_name' => 'letter',],
+            //End Buku Agenda
+
+            //Galeri File
+            ['name'=> 'fileletter.menu', 'guard_name' => 'web', 'group_name' => 'letter',],
+            ['name'=> 'in.fileletter', 'guard_name' => 'web', 'group_name' => 'letter',],
+            ['name'=> 'out.fileletter', 'guard_name' => 'web', 'group_name' => 'letter',],
+            //End Galeri File
+            ['name'=> 'klasifikasi.menu', 'guard_name' => 'web', 'group_name' => 'letter',],
+
+            //Finance
+            ['name'=> 'labelfinence.menu', 'guard_name' => 'web', 'group_name' => 'finance',],
+
+            ['name'=> 'payment.menu', 'guard_name' => 'web', 'group_name' => 'finance',],
+            ['name'=> 'detil.payment', 'guard_name' => 'web', 'group_name' => 'finance',],
+            ['name'=> 'transaction.payment', 'guard_name' => 'web', 'group_name' => 'finance',],
+            //End Finance
+
+            //Savings Students
+            ['name'=> 'savings.menu', 'guard_name' => 'web', 'group_name' => 'studentsavings',],
+
+            ['name'=> 'credit.savings', 'guard_name' => 'web', 'group_name' => 'studentsavings',],
+            ['name'=> 'debet.savings', 'guard_name' => 'web', 'group_name' => 'studentsavings',],
+            //End Savings Students
+
+            //Keuangan Lembaga
+            ['name'=> 'schoolfinance.menu', 'guard_name' => 'web', 'group_name' => 'schoolfinance',],
+
+            ['name'=> 'income', 'guard_name' => 'web', 'group_name' => 'schoolfinance',],
+            ['name'=> 'expenditure', 'guard_name' => 'web', 'group_name' => 'schoolfinance',],
+            ['name'=> 'loan', 'guard_name' => 'web', 'group_name' => 'schoolfinance',],
+            //End Keuangan Lembaga
+
+            //Cetak Laporan
+            ['name'=> 'financereport.menu', 'guard_name' => 'web', 'group_name' => 'financereport',],
+
+            ['name'=> 'paymenttransaction.report', 'guard_name' => 'web', 'group_name' => 'financereport',],
+            ['name'=> 'depositwithdrawal.report', 'guard_name' => 'web', 'group_name' => 'financereport',],
+            ['name'=> 'schoolfinance.report', 'guard_name' => 'web', 'group_name' => 'financereport',],
+            //End Cetak Laporan
+
+            //Manage Data
+            ['name'=> 'labelmanagedata.menu', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'institutional.menu', 'guard_name' => 'web', 'group_name' => 'managedata',],
+
+            ['name'=> 'profil.institutional', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'leader.institutional', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'ustadz.menu', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'students.menu', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'list.students', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'mutation.students', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'academic.students', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'rombel.students', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            //End Manage Data
+
             //Admin
             ['name'=> 'admin.menu', 'guard_name' => 'web', 'group_name' => 'admin',],
             ['name'=> 'all.admin', 'guard_name' => 'web', 'group_name' => 'admin',],
@@ -88,6 +153,42 @@ class UsersTableSeeder extends Seeder
         ]);
         $sadmin->assignRole('superadmin');
         $sadmin->givePermissionTo([
+            // Letter
+            'labelletter.menu', 'letter.menu', 'in.letter', 'out.letter',
+            'agendabook.menu', 'in.agendabook', 'out.agendabook',
+            'fileletter.menu', 'in.fileletter', 'out.fileletter',
+            'klasifikasi.menu',
+            // End Letter
+
+            // Finance
+            'labelfinence.menu',
+            'payment.menu', 'detil.payment', 'transaction.payment',
+            // End Finance
+
+            // Savings Students
+            'savings.menu',
+            'credit.savings', 'debet.savings',
+            // End Savings Students
+
+            // Keuangan Lembaga
+            'schoolfinance.menu',
+            'income', 'expenditure', 'loan',
+            // End Keuangan Lembaga
+
+            // Laporan Keuangan
+            'financereport.menu',
+            'paymenttransaction.report', 'depositwithdrawal.report', 'schoolfinance.report',
+            // End Laporan Keuangan
+
+            // Manage Data
+            'labelmanagedata.menu',
+            'institutional.menu',
+            'profil.institutional', 'leader.institutional',
+            'ustadz.menu',
+            'students.menu', 'list.students', 'mutation.students', 'academic.students', 'rombel.students',
+
+            // End Manage Data
+
             'admin.menu',
             'all.admin',
             'add.admin',
@@ -133,7 +234,6 @@ class UsersTableSeeder extends Seeder
             'edit.type',
             'delete.type',
             // End Amenitie & Type
-
         ]);
 
         $admin = User::create([
