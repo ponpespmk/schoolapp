@@ -4,6 +4,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\Backend\PropertyTypeController;
 use App\Http\Controllers\Backend\RoleController;
+use App\Http\Controllers\Backend\RombelController;
+use App\Http\Controllers\Backend\UstadzController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -100,12 +102,12 @@ Route::middleware(['auth','role:superadmin|admin'])->group(function(){
     //Roles All Route
     Route::controller(RoleController::class)->group(function(){
         Route::get('/all/roles','AllRoles')->name('all.roles')->middleware('permission:all.roles');
-        Route::get('/add/roles','AddRoles')->name('add.roles')->middleware('permission:add.role');
+        Route::get('/add/roles','AddRoles')->name('add.roles')->middleware('permission:add.roles');
         Route::post('/store/roles','StoreRoles')->name('store.roles');
-        Route::get('/edit/roles/{id}','EditRoles')->name('edit.roles')->middleware('permission:edit.role');
-        Route::post('/update/roles','UpdateRoles')->name('update.roles')->middleware('permission:update.role');
-        Route::get('/delete/roles/{id}','DeleteRoles')->name('delete.roles')->middleware('permission:delete.role');
-        Route::get('/import/roles','ImportRoles')->name('import.roles')->middleware('permission:import.role');
+        Route::get('/edit/roles/{id}','EditRoles')->name('edit.roles')->middleware('permission:edit.roles');
+        Route::post('/update/roles','UpdateRoles')->name('update.roles')->middleware('permission:update.roles');
+        Route::get('/delete/roles/{id}','DeleteRoles')->name('delete.roles')->middleware('permission:delete.roles');
+        Route::get('/import/roles','ImportRoles')->name('import.roles')->middleware('permission:import.roles');
 
         Route::get('/add/roles/permission','AddRolesPermission')->name('add.roles.permission')->middleware('permission:add.rolespermission');
         Route::get('/all/roles/permission','AllRolesPermission')->name('all.roles.permission')->middleware('permission:all.rolespermission');
@@ -130,6 +132,16 @@ Route::middleware(['auth','role:superadmin|admin'])->group(function(){
         Route::get('/edit/admin/{id}','EditAdmin')->name('edit.admin')->middleware('permission:edit.admin');
         Route::post('/update/admin/{id}','UpdateAdmin')->name('update.admin');
         Route::get('/delete/admin/{id}','DeleteAdmin')->name('delete.admin')->middleware('permission:delete.admin');
+    });
+
+    //Ustadz Ustadzah All Route
+    Route::controller(UstadzController::class)->group(function(){
+        Route::get('/admin/ustadz/list','UstadzList')->name('all.ustadz')->middleware('permission:ustadz.list');
+        Route::get('/admin/ustadz/add','AddUstadz')->name('add.ustadz')->middleware('permission:ustadz.add');
+        Route::post('/admin/ustadz/store','StoreUstadz')->name('store.ustadz')->middleware('permission:ustadz.store');
+        Route::get('/admin/ustadz/edit/{id}','EditUstadz')->name('edit.ustadz')->middleware('permission:ustadz.edit');
+        Route::post('/admin/ustadz/update','UpdateUstadz')->name('update.ustadz')->middleware('permission:ustadz.update');
+
     });
 
 

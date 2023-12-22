@@ -28,7 +28,7 @@
             <li class="side-nav-item">
                 <a href="{{ route('admin.dashboard') }}" class="side-nav-link">
                     <i class="ri-dashboard-3-line"></i>
-                    <span class="badge bg-success float-end">5+</span>
+                    {{-- <span class="badge bg-success float-end">5+</span> --}}
                     <span> Dashboard </span>
                 </a>
             </li>
@@ -301,8 +301,9 @@
             <!--- Ustad / Ustadzah -->
             @if (Auth::user()->can('ustadz.menu'))
                 <li class="side-nav-item">
-                    <a href="#" class="side-nav-link">
+                    <a href="{{ route('all.ustadz') }}" class="side-nav-link">
                         <i class="ri-group-2-fill"></i>
+                        <span class="badge bg-success float-end">{{DB::table('ustadzs')->count()}}</span>
                         <span> Ustad / Ustadzah </span>
                     </a>
                 </li>

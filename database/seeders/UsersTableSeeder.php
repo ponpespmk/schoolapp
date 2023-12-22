@@ -75,19 +75,29 @@ class UsersTableSeeder extends Seeder
             ['name'=> 'schoolfinance.report', 'guard_name' => 'web', 'group_name' => 'financereport',],
             //End Cetak Laporan
 
-            //Manage Data
+        //Manage Data
             ['name'=> 'labelmanagedata.menu', 'guard_name' => 'web', 'group_name' => 'managedata',],
             ['name'=> 'institutional.menu', 'guard_name' => 'web', 'group_name' => 'managedata',],
 
+            //ustad Ustadzah
+            ['name'=> 'ustadz.menu', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'ustadz.list', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'ustadz.add', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'ustadz.store', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'ustadz.edit', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'ustadz.view', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'ustadz.delete', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'ustadz.update', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            //end ustad Ustadzah
+
             ['name'=> 'profil.institutional', 'guard_name' => 'web', 'group_name' => 'managedata',],
             ['name'=> 'leader.institutional', 'guard_name' => 'web', 'group_name' => 'managedata',],
-            ['name'=> 'ustadz.menu', 'guard_name' => 'web', 'group_name' => 'managedata',],
             ['name'=> 'students.menu', 'guard_name' => 'web', 'group_name' => 'managedata',],
             ['name'=> 'list.students', 'guard_name' => 'web', 'group_name' => 'managedata',],
             ['name'=> 'mutation.students', 'guard_name' => 'web', 'group_name' => 'managedata',],
             ['name'=> 'academic.students', 'guard_name' => 'web', 'group_name' => 'managedata',],
             ['name'=> 'rombel.students', 'guard_name' => 'web', 'group_name' => 'managedata',],
-            //End Manage Data
+        //End Manage Data
 
             //Admin
             ['name'=> 'admin.menu', 'guard_name' => 'web', 'group_name' => 'admin',],
@@ -112,6 +122,7 @@ class UsersTableSeeder extends Seeder
             ['name'=> 'permission.menu', 'guard_name' => 'web', 'group_name' => 'permission',],
             ['name'=> 'all.permission', 'guard_name' => 'web', 'group_name' => 'permission',],
             ['name'=> 'add.permission', 'guard_name' => 'web', 'group_name' => 'permission',],
+            ['name'=> 'store.permission', 'guard_name' => 'web', 'group_name' => 'permission',],
             ['name'=> 'edit.permission', 'guard_name' => 'web', 'group_name' => 'permission',],
             ['name'=> 'delete.permission', 'guard_name' => 'web', 'group_name' => 'permission',],
             ['name'=> 'export.permission', 'guard_name' => 'web', 'group_name' => 'permission',],
@@ -136,6 +147,11 @@ class UsersTableSeeder extends Seeder
             ['name'=> 'delete.type', 'guard_name' => 'web', 'group_name' => 'type',],
             //End Type & Amenitie
 
+            //Rombel List
+            ['name'=> 'rombel.menu', 'guard_name' => 'web', 'group_name' => 'rombel',],
+            ['name'=> 'rombel.list', 'guard_name' => 'web', 'group_name' => 'rombel',],
+            //End Rombel List
+
 
         ]);
 
@@ -153,6 +169,10 @@ class UsersTableSeeder extends Seeder
         ]);
         $sadmin->assignRole('superadmin');
         $sadmin->givePermissionTo([
+            // Rombel
+            'rombel.menu', 'rombel.list',
+            // End rombel
+
             // Letter
             'labelletter.menu', 'letter.menu', 'in.letter', 'out.letter',
             'agendabook.menu', 'in.agendabook', 'out.agendabook',
@@ -184,7 +204,7 @@ class UsersTableSeeder extends Seeder
             'labelmanagedata.menu',
             'institutional.menu',
             'profil.institutional', 'leader.institutional',
-            'ustadz.menu',
+            'ustadz.menu', 'ustadz.list','ustadz.add','ustadz.store','ustadz.edit','ustadz.view','ustadz.delete','ustadz.update',
             'students.menu', 'list.students', 'mutation.students', 'academic.students', 'rombel.students',
 
             // End Manage Data
@@ -204,6 +224,7 @@ class UsersTableSeeder extends Seeder
             'permission.menu',
             'all.permission',
             'add.permission',
+            'store.permission',
             'edit.permission',
             'delete.permission',
             'export.permission',
