@@ -7,3 +7,6 @@
 <!-- Icons css -->
 <link href="/backend/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
 
+<!-- Icons css -->
+<link href="/backend/assets/css/custom.css" rel="stylesheet" type="text/css" />
+

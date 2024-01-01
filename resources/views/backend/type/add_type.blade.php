@@ -24,7 +24,6 @@
                         @csrf
                         <div class="row">
                             <div class="col-lg-6">
-                                {{-- <h5 class="mb-3">Type Name</h5> --}}
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control @error('type_name') is-invalid @enderror" name="type_name" id="type_name" placeholder="typename">
                                     <label for="type_name">Type Name</label>
@@ -32,7 +31,6 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                {{-- <h5 class="mb-3">Type Icon</h5> --}}
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control @error('type_name') is-invalid @enderror" name="type_icon" id="type_icon" placeholder="typeicon">
                                     <label for="type_icon">Type Icon</label>

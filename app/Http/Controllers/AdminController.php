@@ -41,8 +41,11 @@ class AdminController extends Controller
 
     public function AdminProfileStore(Request $request)
     {
+
+        // dd($request->file('photo'));
+
         $id = Auth::user()->id;
-        $data = User::find($id);
+        $data = User::find($id);dd($data);
         $data->username = $request->username;
         $data->name     = $request->name;
         $data->email    = $request->email;
@@ -51,9 +54,9 @@ class AdminController extends Controller
 
         if ($request->file('photo')) {
             $file = $request->file('photo');
-            @unlink(public_path('upload/admin_images/'.$data->photo));
+            @unlink(public_path('upload/images_admin/'.$data->photo));
             $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move(public_path('upload/admin_images'),$filename);
+            $file->move(public_path('upload/images_admin'),$filename);
             $data['photo'] = $filename;
         }
         $data->save();

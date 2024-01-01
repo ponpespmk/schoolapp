@@ -6,7 +6,6 @@
     @yield('css')
     @include('admin.shared/head-css', ['mode' => $mode ?? '', 'demo' => $demo ?? ''])
     @yield('toast-css')
-
 </head>
 
 <body>

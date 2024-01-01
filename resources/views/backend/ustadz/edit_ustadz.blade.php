@@ -15,7 +15,7 @@
                 $tglGabung = \Carbon\Carbon::parse($ustadzs->tgl_gabung);
                 $selisih = $tglGabung->diff(\Carbon\Carbon::now());
                 @endphp
-                <h3 class="text-success">{{ strtoupper($ustadzs->nama) }}, {{ $ustadzs->gelar_belakang }}</h3>
+                <h3 class="text-success">{{ strtoupper($ustadzs->nama_ustadz) }}, {{ $ustadzs->gelar_belakang }}</h3>
                 <p class="card-text">Tanggal Bergabung : {{ \Carbon\Carbon::parse($ustadzs->tgl_gabung)->isoFormat('DD MMMM YYYY') }} | Lama Mengabdi : {{ $selisih->y }} tahun, {{ $selisih->m }} bulan, {{ $selisih->d }} hari
                 </p>
             </div> <!-- end card-body-->
@@ -40,20 +40,25 @@
                             <div class="profile-desk">
                                 <div class="alert alert-info" role="alert">Kolom dengan tanda (<strong class="text-danger">*</strong>) adalah kolom wajib diisi, kolom tnpa tanda (<strong class="text-danger">*</strong>) opsional yang tidak wajib diisi. <br>Untuk Photo Profil bisa langsung Klick Gambar untuk menggantinya.
                                 </div>
-                                <form method="POST" action="{{ route('update.ustadz') }}" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('update.ustadz', $ustadzs->id) }}" enctype="multipart/form-data">
                                     <h5 class="text-uppercase fs-17 text-dark">DATA DIRI</h5>
                                     @csrf
                                     <div class="row align-items-center my-2">
-                                        <input type="hidden" name="id" value="{{ $ustadzs->id }}">
                                         <div class="col-lg-2 mt-2 text-center">
                                             <input type="file" name="pas_foto" id="pas_foto" style="display: none;" accept="image/*">
+                                            <!-- Container untuk gambar profil -->
+                                            <div class="profile-picture-container">
+                                                <label for="pas_foto" style="cursor: pointer;">
+                                                    <img id="previewFoto" src="{{ (!empty($ustadzs->pas_foto) && file_exists(public_path('upload/images_santri/foto/'.str_replace(' ', '_', $ustadzs->pas_foto)))) ? url('upload/images_santri/foto/'.str_replace(' ', '_', $ustadzs->pas_foto)) : ($ustadzs->jenkel == 'l' ? url('upload/male_noimage.png') : url('upload/female_noimage.png')) }}" alt="image" class="img-fluid avatar-xl">
 
-                                            <!-- Tombol untuk memilih foto baru -->
-                                            <label for="pas_foto" style="cursor: pointer;" title="Klick Untuk Ganti Foto">
-                                                <img id="previewFoto" src="@if($ustadzs->jenkel == 'L')
-                                                {{ (!empty($ustadzs->pas_foto)) ? url('upload/ustadz_image/photo/'.$ustadzs->pas_foto) : url('upload/male_noimage.png') }} @else
-                                                {{ (!empty($ustadzs->pas_foto)) ? url('upload/ustadz_image/photo/'.$ustadzs->pas_foto) : url('upload/female_noimage.png') }} @endif" alt="image" class="img-fluid avatar-xl rounded-circle">
-                                            </label>
+                                                </label>
+                                                <!-- Tombol untuk memilih foto baru -->
+                                                <div class="upload-button">
+                                                    <label for="pas_foto" class="upload-icon">
+                                                        <i class="ri-camera-fill position-absolute"></i>
+                                                    </label>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-lg-3 mt-2">
                                             <div class="form-floating">
@@ -67,10 +72,10 @@
                                         </div>
                                         <div class="col-lg-4 mt-2">
                                             <div class="form-floating">
-                                                <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" id="nama" autocomplete="off" placeholder="nama" value="{{ $ustadzs->nama }}">
-                                                <label for="nama">Nama Lengkap<strong class="text-danger"> *</strong></label>
+                                                <input type="text" class="form-control @error('nama_ustadz') is-invalid @enderror" name="nama_ustadz" id="nama_ustadz" autocomplete="off" placeholder="nama_ustadz" value="{{ $ustadzs->nama_ustadz }}">
+                                                <label for="nama_ustadz">Nama Lengkap<strong class="text-danger"> *</strong></label>
                                                 <span class="text-white"> a</span>
-                                                @error('nama')
+                                                @error('nama_ustadz')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
@@ -218,7 +223,7 @@
                                         <div class="col-lg-4">
                                             <div class="form-floating mt-2">
                                                 <select class="form-select" name="gol_darah" id="gol_darah" aria-label="Floating label select example">
-                                                    <option selected="">-Pilih-</option>
+                                                    <option value="-" {{ $ustadzs->gol_darah == '-' ? 'selected' : '' }}>Belum Tau</option>
                                                     <option value="A+" {{ $ustadzs->gol_darah == 'A+' ? 'selected' : '' }}>A+</option>
                                                     <option value="B+" {{ $ustadzs->gol_darah == 'B+' ? 'selected' : '' }}>B+</option>
                                                     <option value="AB+" {{ $ustadzs->gol_darah == 'AB+' ? 'selected' : '' }}>AB+</option>
@@ -235,10 +240,32 @@
                                     <div class="row align-items-center">
                                         <div class="col-lg-4">
                                             <div class="form-floating mt-2">
-                                                <input type="text" class="form-control @error('pddk_terakhir') is-invalid @enderror" name="pddk_terakhir" id="pddk_terakhir" autocomplete="off" placeholder="pddk_terakhir" value="{{ $ustadzs->pddk_terakhir }}">
+                                                {{-- <input type="text" class="form-control @error('pddk_terakhir') is-invalid @enderror" name="pddk_terakhir" id="pddk_terakhir" autocomplete="off" placeholder="pddk_terakhir" value="{{ $ustadzs->pddk_terakhir }}">
                                                 <label for="pddk_terakhir">Pendidikan Terakhir<strong class="text-danger"> *</strong></label>
                                                 @error('pddk_terakhir')
                                                     <span class="text-danger">{{ $message }}</span>
+                                                @enderror --}}
+
+                                                <select class="form-select @error('pddk_terakhir') is-invalid @enderror" name="pddk_terakhir" id="pddk_terakhir" aria-label="Floating label select example">
+                                                    <option selected=""></option>
+                                                    <option value="SD" {{ old('pddk_terakhir') == 'SD' ? 'selected' : '' }} {{ ($ustadzs->pddk_terakhir == 'SD') ? 'selected' : '' }}>SD/Sederajat</option>
+                                                    <option value="SMP" {{ old('pddk_terakhir') == 'SMP' ? 'selected' : '' }} {{ ($ustadzs->pddk_terakhir == 'SMP') ? 'selected' : '' }}>SMP/Sederajat</option>
+                                                    <option value="SMA" {{ old('pddk_terakhir') == 'SMA' ? 'selected' : '' }} {{ ($ustadzs->pddk_terakhir == 'SMA') ? 'selected' : '' }}>SMA/Sederajat</option>
+                                                    <option value="D1" {{ old('pddk_terakhir') == 'D1' ? 'selected' : '' }} {{ ($ustadzs->pddk_terakhir == 'D1') ? 'selected' : '' }}>D1</option>
+                                                    <option value="D2" {{ old('pddk_terakhir') == 'D2' ? 'selected' : '' }} {{ ($ustadzs->pddk_terakhir == 'D2') ? 'selected' : '' }}>D2</option>
+                                                    <option value="D4" {{ old('pddk_terakhir') == 'D4' ? 'selected' : '' }} {{ ($ustadzs->pddk_terakhir == 'D4') ? 'selected' : '' }}>D4/S1</option>
+                                                    <option value="S2" {{ old('pddk_terakhir') == 'S2' ? 'selected' : '' }} {{ ($ustadzs->pddk_terakhir == 'S2') ? 'selected' : '' }}>S2</option>
+                                                    <option value="S3" {{ old('pddk_terakhir') == 'S3' ? 'selected' : '' }} {{ ($ustadzs->pddk_terakhir == 'S3') ? 'selected' : '' }}>S3</option>
+                                                    <option value="M1" {{ old('pddk_terakhir') == 'M1' ? 'selected' : '' }} {{ ($ustadzs->pddk_terakhir == 'M1') ? 'selected' : '' }}>M1</option>
+                                                    <option value="M2" {{ old('pddk_terakhir') == 'M2' ? 'selected' : '' }} {{ ($ustadzs->pddk_terakhir == 'M2') ? 'selected' : '' }}>M2</option>
+                                                    <option value="M3" {{ old('pddk_terakhir') == 'M3' ? 'selected' : '' }} {{ ($ustadzs->pddk_terakhir == 'M3') ? 'selected' : '' }}>M3</option>
+                                                    <option value="-" {{ old('pddk_terakhir') == '-' ? 'selected' : '' }} {{ ($ustadzs->pddk_terakhir == '-') ? 'selected' : '' }}>Tidak Memiliki Pendidikan Formal</option>
+                                                </select>
+                                                <label for="pddk_terakhir">Pendidikan Terakhir</label>
+                                                @error('pddk_terakhir')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
                                                 @enderror
                                             </div>
                                         </div>
@@ -362,7 +389,7 @@
                                     </div>
                                     <div class="col-9 mt-2 d-flex flex-wrap gap-2 mt-3">
                                         <button type="submit" class="btn btn-primary"><i class="ri-save-line me-1 fs-16 lh-1"></i>Simpan</button>
-                                        <a href="{{ route('all.ustadz') }}" class="btn btn-danger"><i class="ri-delete-back-2-line me-1 fs-16"></i> <span>Batal</span> </a>
+                                        <a href="{{ route('all.ustadz') }}" class="btn btn-warning"><i class="ri-delete-back-2-line me-1 fs-16"></i> <span>Kembali</span> </a>
                                     </div>
                                 </form>
                             </div> <!-- end profile-desk -->

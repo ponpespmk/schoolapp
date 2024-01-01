@@ -6,13 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Ustadz;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class UstadzController extends Controller
 {
     public function UstadzList(){
 
-        $ustadz = Ustadz::latest()->get();
-        return view('backend.ustadz.all_ustadz',compact('ustadz'));
+        $ustadzs = Ustadz::latest()->get();
+        return view('backend.ustadz.all_ustadz',compact('ustadzs'));
     }// End Method
 
     public function AddUstadz(){
@@ -21,25 +22,59 @@ class UstadzController extends Controller
     }// End Method
 
     public function StoreUstadz(Request $request){
-
-        $ustadz = Ustadz::create([
-            'satminkal'     => $request->satminkal,
-            'jabatan_utama' => $request->jabatan_utama,
-            'nama'          => $request->nama,
-            'nik'           => $request->nik,
-            'tempat_lahir'  => $request->tempat_lahir,
-            'tgl_lahir'     => Carbon::createFromFormat('m/d/Y', $request->tgl_lahir)->format('Y-m-d'),
-            'jenkel'        => $request->jenkel,
-            'no_hp'         => $request->no_hp,
-            'tgl_gabung'    => Carbon::createFromFormat('m/d/Y', $request->tgl_gabung)->format('Y-m-d'),
+        // Validasi
+        $request->validate([
+            'nama_ustadz'   => 'required|max:64',
+            'jenkel'        => 'required',
+            'tempat_lahir'  => 'required',
+            'tgl_lahir'     => 'required',
+            'nik'           => 'required|unique:ustadzs,nik|max:16',
+            'tgl_gabung'    => 'required|max:64',
+            'satminkal'     => 'required',
+            'jabatan_utama' => 'required',
+            'no_hp'         => 'required',
         ]);
 
-        $notification = array(
-            'message'       => 'Data Ustadz/Ustadzah Create Successfully',
-            'alert-type'    => 'success'
-        );
+        // Simpan Data
+        $ustadz = Ustadz::create([
+            'nama_ustadz'   => $request->nama_ustadz,
+            'jenkel'        => $request->jenkel,
+            'tempat_lahir'  => $request->tempat_lahir,
+            'tgl_lahir'     => $request->tgl_lahir,
+            'nik'           => $request->nik,
+            'tgl_gabung'    => $request->tgl_gabung,
+            'satminkal'     => $request->satminkal,
+            'jabatan_utama' => $request->jabatan_utama,
+            'no_hp'         => $request->no_hp,
+        ]);
 
-        return redirect()->route('edit.ustadz', ['id' => $ustadz->id])->with($notification);
+        // Contoh penetapan nilai $redirectType
+        $redirectType = $request->input('redirectType', 'all');
+
+        // Menambahkan notifikasi SweetAlert
+        Session::flash('swal', [
+            'type'    => 'success',
+            'message' => 'Data Ustad/Ustadzah berhasil disimpan!',
+            'options' => [
+                'confirmButtonText' => 'Lengkapi Sekarang',
+                'cancelButtonText'  => 'Lengkapi Nanti',
+                'reverseButtons'    => true,
+            ],
+        ]);
+
+        // Menambahkan notifikasi Toastr
+        Session::flash('message', [
+            'type'      => 'success',
+            'message'   => 'Data Ustad/Ustadzah berhasil disimpan!',
+        ]);
+
+
+        // Redirect sesuai pilihan
+        if ($redirectType === 'edit') {
+            return redirect()->route('edit.ustadz', ['id' => $ustadz->id]);
+        } else {
+            return redirect()->route('all.ustadz');
+        }
 
     }// End Method
 
@@ -70,19 +105,19 @@ class UstadzController extends Controller
         if ($request->file('pas_foto')) {
             $file = $request->file('pas_foto');
             $filename = date('YmdHi') . $file->getClientOriginalName();
-            $file->move(public_path('upload/ustadz_image/photo'), $filename);
+            $file->move(public_path('upload/images_ustadz/photo'), $filename);
             $data['pas_foto'] = $filename;
 
             // Delete the old file if it exists
-            if ($oldPasFoto && file_exists(public_path('upload/ustadz_image/photo') . '/' . $oldPasFoto)) {
-                unlink(public_path('upload/ustadz_image/photo') . '/' . $oldPasFoto);
+            if ($oldPasFoto && file_exists(public_path('upload/images_ustadz/photo') . '/' . $oldPasFoto)) {
+                unlink(public_path('upload/images_ustadz/photo') . '/' . $oldPasFoto);
             }
         }
 
         Ustadz::findOrFail($ustz)->update([
 
             'gelar_depan'           => $request->gelar_depan,
-            'nama'                  => $request->nama,
+            'nama_ustadz'           => $request->nama_ustadz,
             'gelar_belakang'        => $request->gelar_belakan,
             'status_kepegawaian'    => $request->status_kepegawaian,
             'nik'                   => $request->nik,
@@ -95,12 +130,11 @@ class UstadzController extends Controller
             'npwp'                  => $request->npwp,
             'jenkel'                => $request->jenkel,
             'tempat_lahir'          => $request->tempat_lahir,
-            'tgl_lahir'             => Carbon::createFromFormat('m/d/Y', $request->tgl_lahir)->format('Y-m-d'),
+            'tgl_lahir'             => $request->tgl_lahir,
             'gol_darah'             => $request->gol_darah,
             'pddk_terakhir'         => $request->pddk_terakhir,
             'prodi'                 => $request->prodi,
-            'tgl_ijazah'            => Carbon::createFromFormat('m/d/Y', $request->tgl_ijazah)->format('Y-m-d'),
-            'ibu_kandung'           => $request->ibu_kandung,
+            'tgl_ijazah'            => $request->tgl_ijazah,
             'status_perkawinan'     => $request->status_perkawinan,
             'nama_suami_istri'      => $request->nama_suami_istri,
             'jml_anak'              => $request->jml_anak,
@@ -109,6 +143,19 @@ class UstadzController extends Controller
 
         $notification = array(
             'message'       => 'Data Diri Ustadz/Ustadzah berhasil di Update!',
+            'alert-type'    => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+
+    }// End Method
+
+    public function DeleteUstadz($id){
+
+        Ustadz::findOrFail($id)->delete();
+
+        $notification = array(
+            'message'       => 'Data Ustadz berhasil di Hapus!',
             'alert-type'    => 'success'
         );
 

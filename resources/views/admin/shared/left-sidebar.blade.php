@@ -323,7 +323,8 @@
 
                             @if (Auth::user()->can('list.students'))
                             <li>
-                                <a href="javascript: void(0);">Data Santri</a>
+                                <span class="badge bg-success float-end">{{ DB::table('santris')->count() }}</span>
+                                <a href="{{ route('all.santri') }}">Data Santri</a>
                             </li>
                             @endif
 
@@ -368,9 +369,12 @@
                             </li>
                             @endif
 
-                            @if (Auth::user()->can('rombel.students'))
+                            @if (Auth::user()->can('rombel.menu'))
                             <li>
-                                <a href="javascript: void(0);">Rombongan Belajar</a>
+                                <a href="{{ route('all.rombel') }}">
+                                    <span class="badge bg-success float-end">{{DB::table('rombels')->count()}}</span>
+                                    <span> Rombongan Belajar </span>
+                                </a>
                             </li>
                             @endif
                         </ul>

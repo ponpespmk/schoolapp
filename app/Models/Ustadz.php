@@ -10,4 +10,14 @@ class Ustadz extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function rombel()
+    {
+        return $this->hasOne(Rombel::class, 'ustadz_id');
+    }
+
+    public function asrama()
+    {
+        return $this->hasOne(Asrama::class, 'ustadz_id');
+    }
 }

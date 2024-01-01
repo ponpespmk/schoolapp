@@ -18,12 +18,6 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                {{-- <h4 class="header-title">Scroll - Horizontal</h4>
-                <p class="text-muted mb-0">
-                    DataTables has the ability to show tables with horizontal scrolling, which is
-                    very useful for when you have a wide
-                    table, but want to constrain it to a limited horizontal display area.
-                </p><br> --}}
                 <a href="{{ route('add.type') }}" class="btn btn-info">
                     <i class="ri-add-circle-line me-1"></i>
                     <span>Add Property Type</span> </a>

@@ -5,6 +5,7 @@ use App\Http\Controllers\AgentController;
 use App\Http\Controllers\Backend\PropertyTypeController;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\RombelController;
+use App\Http\Controllers\Backend\SantriController;
 use App\Http\Controllers\Backend\UstadzController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -140,7 +141,30 @@ Route::middleware(['auth','role:superadmin|admin'])->group(function(){
         Route::get('/admin/ustadz/add','AddUstadz')->name('add.ustadz')->middleware('permission:ustadz.add');
         Route::post('/admin/ustadz/store','StoreUstadz')->name('store.ustadz')->middleware('permission:ustadz.store');
         Route::get('/admin/ustadz/edit/{id}','EditUstadz')->name('edit.ustadz')->middleware('permission:ustadz.edit');
-        Route::post('/admin/ustadz/update','UpdateUstadz')->name('update.ustadz')->middleware('permission:ustadz.update');
+        Route::post('/admin/ustadz/update/{id}','UpdateUstadz')->name('update.ustadz')->middleware('permission:ustadz.update');
+        Route::get('/admin/ustadz/delete/{id}','DeleteUstadz')->name('delete.ustadz')->middleware('permission:ustadz.delete');
+
+    });
+
+    //Rombel All Route
+    Route::controller(RombelController::class)->group(function(){
+        Route::get('/admin/santri/rombel/list','RombelList')->name('all.rombel')->middleware('permission:rombel.list');
+        Route::get('/admin/santri/rombel/add','AddRombel')->name('add.rombel')->middleware('permission:rombel.add');
+        Route::post('/admin/santri/rombel/store','StoreRombel')->name('store.rombel')->middleware('permission:rombel.store');
+        Route::get('/admin/santri/rombel/edit/{id}','EditRombel')->name('edit.rombel')->middleware('permission:rombel.edit');
+        Route::post('/admin/santri/rombel/update/{id}','UpdateRombel')->name('update.rombel')->middleware('permission:rombel.update');
+        Route::get('/admin/santri/rombel/delete/{id}','DeleteRombel')->name('delete.rombel')->middleware('permission:rombel.delete');
+
+    });
+
+    //Rombel All Santri
+    Route::controller(SantriController::class)->group(function(){
+        Route::get('/admin/santri/list','SantriList')->name('all.santri')->middleware('permission:santri.list');
+        Route::get('/admin/santri/add','AddSantri')->name('add.santri')->middleware('permission:santri.add');
+        Route::post('/admin/santri/store','StoreSantri')->name('store.santri')->middleware('permission:santri.store');
+        Route::get('/admin/santri/edit/{id}','EditSantri')->name('edit.santri')->middleware('permission:santri.edit');
+        Route::post('/admin/santri/update/{id}','UpdateSantri')->name('update.santri')->middleware('permission:santri.update');
+        Route::get('/admin/santri/delete/{id}','DeleteSantri')->name('delete.santri')->middleware('permission:santri.delete');
 
     });
 

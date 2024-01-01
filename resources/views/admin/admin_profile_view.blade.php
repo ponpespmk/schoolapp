@@ -15,7 +15,7 @@
             <div class="profile-user-box">
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="profile-user-img"><img src="{{ (!empty($profileData->photo)) ? url('upload/admin_images/'.$profileData->photo) : url('upload/no_image.png') }}" alt=""
+                        <div class="profile-user-img"><img src="{{ (!empty($profileData->photo)) ? url('upload/images_admin/'.$profileData->photo) : url('upload/no_image.png') }}" alt=""
                                 class="avatar-lg rounded-circle"></div>
                         <div class="">
                             <h4 class="mt-4 fs-17 ellipsis">{{ $profileData->name }}</h4>
@@ -89,7 +89,7 @@
                                     <label for="image">Photo</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <img id="showImage" src="{{ (!empty($profileData->photo)) ? url('upload/admin_images/'.$profileData->photo) : url('upload/no_image.png') }}" alt="image" class="img-fluid rounded" width="120">
+                                    <img id="showImage" src="{{ (!empty($profileData->photo)) ? url('upload/images_admin/'.$profileData->photo) : url('upload/no_image.png') }}" alt="image" class="img-fluid rounded" width="120">
 
                                 </div>
                             </div>

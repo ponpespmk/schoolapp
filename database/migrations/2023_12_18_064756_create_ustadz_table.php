@@ -15,15 +15,15 @@ return new class extends Migration
             $table->id();
             $table->date('tgl_gabung');
             $table->string('satminkal', 64);
-            $table->string('nama', 64);
+            $table->string('nama_ustadz', 64);
             $table->string('gelar_depan', 16)->nullable();
             $table->string('gelar_belakang', 16)->nullable();
-            $table->string('nik', 18);
+            $table->string('nik', 16)->unique();
             $table->string('tempat_lahir', 32);
             $table->date('tgl_lahir');
             $table->enum('jenkel',['L','P']);
             $table->string('alamat')->nullable();
-            $table->enum('gol_darah', ['A+','B+','AB+','O+','A-','B-','AB-','O-'])->nullable();
+            $table->enum('gol_darah', ['-','A+','B+','AB+','O+','A-','B-','AB-','O-'])->default('-');
             $table->string('pddk_terakhir', 32)->nullable();
             $table->string('prodi', 64)->nullable();
             $table->date('tgl_ijazah')->nullable();

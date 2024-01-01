@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class UsersTableSeeder extends Seeder
 {
@@ -86,9 +86,31 @@ class UsersTableSeeder extends Seeder
             ['name'=> 'ustadz.store', 'guard_name' => 'web', 'group_name' => 'managedata',],
             ['name'=> 'ustadz.edit', 'guard_name' => 'web', 'group_name' => 'managedata',],
             ['name'=> 'ustadz.view', 'guard_name' => 'web', 'group_name' => 'managedata',],
-            ['name'=> 'ustadz.delete', 'guard_name' => 'web', 'group_name' => 'managedata',],
             ['name'=> 'ustadz.update', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'ustadz.delete', 'guard_name' => 'web', 'group_name' => 'managedata',],
             //end ustad Ustadzah
+
+            //Rombel
+            ['name'=> 'rombel.menu', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'rombel.view', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'rombel.list', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'rombel.add', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'rombel.store', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'rombel.edit', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'rombel.update', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'rombel.delete', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            //end Rombel
+
+            //Santri
+            ['name'=> 'santri.menu', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'santri.view', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'santri.list', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'santri.add', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'santri.store', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'santri.edit', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'santri.update', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            ['name'=> 'santri.delete', 'guard_name' => 'web', 'group_name' => 'managedata',],
+            //end Santri
 
             ['name'=> 'profil.institutional', 'guard_name' => 'web', 'group_name' => 'managedata',],
             ['name'=> 'leader.institutional', 'guard_name' => 'web', 'group_name' => 'managedata',],
@@ -147,11 +169,6 @@ class UsersTableSeeder extends Seeder
             ['name'=> 'delete.type', 'guard_name' => 'web', 'group_name' => 'type',],
             //End Type & Amenitie
 
-            //Rombel List
-            ['name'=> 'rombel.menu', 'guard_name' => 'web', 'group_name' => 'rombel',],
-            ['name'=> 'rombel.list', 'guard_name' => 'web', 'group_name' => 'rombel',],
-            //End Rombel List
-
 
         ]);
 
@@ -169,10 +186,6 @@ class UsersTableSeeder extends Seeder
         ]);
         $sadmin->assignRole('superadmin');
         $sadmin->givePermissionTo([
-            // Rombel
-            'rombel.menu', 'rombel.list',
-            // End rombel
-
             // Letter
             'labelletter.menu', 'letter.menu', 'in.letter', 'out.letter',
             'agendabook.menu', 'in.agendabook', 'out.agendabook',
@@ -204,8 +217,10 @@ class UsersTableSeeder extends Seeder
             'labelmanagedata.menu',
             'institutional.menu',
             'profil.institutional', 'leader.institutional',
-            'ustadz.menu', 'ustadz.list','ustadz.add','ustadz.store','ustadz.edit','ustadz.view','ustadz.delete','ustadz.update',
+            'ustadz.menu', 'ustadz.list','ustadz.add','ustadz.store','ustadz.edit','ustadz.view','ustadz.update','ustadz.delete',
             'students.menu', 'list.students', 'mutation.students', 'academic.students', 'rombel.students',
+            'rombel.menu','rombel.view','rombel.list','rombel.add','rombel.store','rombel.edit','rombel.update','rombel.delete',
+            'santri.menu','santri.view','santri.list','santri.add','santri.store','santri.edit','santri.update','santri.delete',
 
             // End Manage Data
 
